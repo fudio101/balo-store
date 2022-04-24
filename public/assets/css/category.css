@@ -1,0 +1,186 @@
+:root {
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #333;
+    --blue-text: #155593;
+    --menu-text-color: #686868;
+    --notifi-color: rgba(238, 130, 224, 0.247);
+    --orange-color: #fb5533;
+    --yellow-color: #f29536;
+    --hover-color: #ededed;
+    --blue2-color: #7a9c59;
+    --border-color: #ddd;
+}
+
+.grid {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+* {
+    box-sizing: initial;
+}
+
+html {
+    font-size: 100%;
+    line-height: 1.6rem;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    scroll-behavior: smooth;
+}
+
+
+/*danh mục*/
+
+.container-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.container-wrapper__page-h1 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+}
+
+.container-wrapper__page-link {
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: var(--menu-text-color);
+    font-weight: 100;
+}
+
+.container-wrapper__page-span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.container-wrapper__page-span:nth-child(1),
+.container-wrapper__page-span:nth-child(2),
+.container-wrapper__page-span:nth-child(3) {
+    font-weight: 100;
+    color: var(--menu-text-color);
+    font-size: 0.85rem;
+    margin: 0 2px;
+}
+
+.container-wrapper__category {
+    display: flex;
+    align-items: center;
+}
+
+.container-wrapper__category-p {
+    font-size: 1rem;
+    font-weight: 100;
+    color: var(--blue-text);
+    padding-right: 20px;
+}
+
+.container-select__list {
+    height: 38px;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 100;
+    padding-left: 8px;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}
+
+
+/*sản phẩm*/
+
+.container-small {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.container-small__form {
+    position: relative;
+    display: block;
+    text-decoration: none;
+}
+
+
+/*fix button*/
+
+.container-form_pay {
+    text-decoration: none;
+    display: block;
+}
+
+
+/*giảm giá*/
+
+.container-small__cart-postion {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+}
+
+.container-small__cart-postion-span {
+    display: block;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 50%;
+    color: var(--white-color);
+    background-color: var(--yellow-color);
+}
+
+
+/*hết giảm giá*/
+
+.container-small__form-img {
+    width: 100%;
+    height: 360px;
+    object-fit: contain;
+    transition: transform linear 0.3s;
+    will-change: transform;
+}
+
+.container-small__form-img:hover {
+    transform: scale(1.075);
+}
+
+.container-small__noti {
+    padding: 8px 10px 25px 10px;
+}
+
+.container-small__noti-p {
+    margin: 0;
+    text-align: center;
+    color: var(--blue-text);
+    font-size: 0.9rem;
+    height: 33px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.container-small__noti-p:hover {
+    color: var(--yellow-color);
+}
+
+.container-small__noti-div {
+    display: flex;
+    padding-top: 10px;
+    justify-content: center;
+}
+
+.container-small__noti-p1 {
+    margin: 0;
+    font-size: 1rem;
+    padding: 0 2px;
+}
+
+.container-small__noti-p1:nth-child(1) {
+    color: var(--text-color);
+    font-weight: 600;
+}

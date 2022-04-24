@@ -1,0 +1,371 @@
+:root{
+    --white-color:#fff;
+    --black-color:#000;
+    --text-color:#333;
+    --blue-text:#155593;
+    --menu-text-color:#686868;
+    --notifi-color:rgba(238, 130, 224, 0.247);
+    --orange-color: #fb5533;
+    --yellow-color:#f29536;
+    --hover-color:#ededed;
+    --blue2-color:#7a9c59;
+    --border-color:#ddd;
+}
+.grid{
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+*{
+    box-sizing: initial;
+}
+html
+{
+    font-size:100%;
+    line-height: 1.6rem;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    scroll-behavior: smooth;
+}
+/*thống báo khi dã thêm vào rõ hàng*/
+.container-pays__message{
+    padding-top: 10px;
+    display:inline-flex;
+    font-size: 1rem;
+    color: var(--blue2-color);
+    align-items: center;
+    font-weight: 100;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.container-pays__noti{
+    margin: 0;
+}
+.container-pays__message-icon{
+    margin: 0;
+    font-size: 1.2rem;
+}
+.container-pays__sale{
+    padding-top: 30px;
+}
+.container-pays__sale-text{
+    font-size: 1rem;
+    color: var(--blue-text);
+    margin: 5px 0;
+    padding: 0 5px;
+}
+.container-pays__span:hover{
+    color: var(--yellow-color);
+}
+.container-pays__login{
+    padding:20px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    border: 2px dashed var(--blue-text);
+    margin-bottom: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    /* transition: linear 0.3s; */
+    display: none;
+}
+.container-pays__login.open{
+    display: flex;
+}
+.container-pays__login-text{
+    font-size: 1rem;
+    color: var(--blue-text);
+}
+.container-pays__span{
+    cursor: pointer;
+}
+.container-pays__login-from{
+    display: inline-flex;
+    padding-top: 5px;
+}
+.container-pays__login-sale{
+    width: 100%;
+    outline: none;
+    font-weight: 100;
+    border: 1px solid var(--border-color);
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.container-pays__login-button{
+    cursor: pointer;
+}
+.container-pays__login-button:hover{
+    opacity: 0.9;
+}
+/*làm bảng form thông tin thanh toán*/
+.container-client{
+    padding-bottom: 40px;
+}
+.container-client__pay{
+    padding-top: 10px;
+    border-top: 2px solid var(--border-color);
+}
+.container-client__pay-text{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    display: block;
+}
+.container-client__flex{
+    display: flex;
+}
+.container-client__flex-name{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.container-client__flex-name:nth-child(1){
+    padding-right: 15px;
+}
+.container-client__flex-name:nth-child(2){
+    padding-left: 15px;
+}
+.container-client__flex-text{
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+.container-client__flex-input{
+    width: 100%;
+    height: 35px;
+    outline: none;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+.container-client__flex-span{
+    margin: 5px 0;
+    color: var(--orange-color);
+    font-size: 0.85rem;
+}
+.container-client__last{
+    padding: 5px 0;
+    display: flex;
+    flex-direction: column;
+}
+.container-client__last-text{
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+.container-client__last-input{
+    width: 100%;
+    height: 35px;
+    outline: none;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+.container-client__last-span{
+    margin: 5px 0;
+    color: var(--orange-color);
+    font-size: 0.85rem;
+}
+/*đơn hàng của bạn*/
+.container-bill{
+    border: 2px solid var(--blue-text);
+    padding: 15px 30px 30px 30px;
+}
+.container-bill__text{
+    margin: 5px 0;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.container-bill__noti{
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-color);
+}
+.container-bill__noti-span{
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--blue-text);
+}
+.container-bill__list{
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+.container-bill__item{
+    border-bottom: 2px solid var(--border-color);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.container-bill__item-flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.container-bill__item-text{
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin: 0;
+    padding-right: 10px;
+}
+.container-bill__item-sapn{
+    font-weight: 600;
+    font-size: 1rem;
+}
+.container-bill__item-money{
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.container-bill__price{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--border-color);
+}
+.container-bill__price-text{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+.container-bill__price-text:nth-child(2){
+    font-size: 1rem;
+    color: var(--black-color);
+}
+.container-bill__pay-text{
+    font-size: 1.1rem;
+    color: var(--blue-text);
+    font-weight: 100;
+    line-height: 1.5;
+}
+.container-bill__pay-noti{
+    font-size: 0.9rem;
+    color: var(--blue-text);
+    font-weight: 100;
+    line-height: 1.5;
+}
+.container-bill__pay-submit{
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.container-bill__pay-submit:hover{
+    opacity: 0.9;
+}
+
+
+
+/*Thanh toán*/
+.modal-pay
+{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+.modal-pay.open{
+    display: flex;
+}
+.modal-pay__over
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    
+}
+.modal-pay__form{
+    background-color: var(--white-color);
+    border-radius: 20px;
+    margin: auto;
+    max-width: 500px;
+    width: 100%;
+    animation-name: paymodal;
+    animation-duration: 1s;
+    z-index: 1;
+    text-align: center;
+}
+@keyframes paymodal{
+    from{
+        opacity: 0;
+        transform: translateY(-250px);
+    }
+    to
+    {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* chỉnh ảnh momo */
+.modal-form__list{
+    text-align: right;
+}
+.modal-form__img-list{
+    height: 70px;
+    width: 70px;
+}
+.modal-form__list-text{
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--pays-color);
+    margin-top: 0;
+}
+.modal-form__img-last{
+    height: 200px;
+    width: 200px;
+    border-radius: 3px;
+}
+/*chinh text thanh toán thanh công*/
+.modal-form__list-span{
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #579e0f;
+}
+/*sư lý thanh toán*/
+.modal-form__pays{
+    margin: 10px 0 15px 0;
+    display: flex;
+    justify-content: center;
+
+}
+.modal-form__pays-submit{
+    padding: 10px;
+    color: var(--white-color);
+    background-color:#579e0f;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.modal-form__pays-submit:hover{
+    background-color: #356307;
+}
+.modal-form__pays-close{
+    padding: 10px 20px;
+    color: var(--white-color);
+    background-color:#ee1c14;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 5px;
+    display: none;
+}
+.modal-form__pays-close.open{
+    display: block;
+}
+.modal-form__pays-close:hover{
+    background-color: #c0270c;
+}
