@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,15 @@ Route::middleware('auth')->group(function () {
             Route::post('/',[CategoryController::class,'store'])->name('categoryStore');
             Route::post('/update',[CategoryController::class,'update'])->name('categoryUpdate');
             Route::delete('/{category}',[CategoryController::class,'destroy'])->name('categoryDestroy');
+        });
+
+        #Product
+        Route::prefix('products')->group(function () {
+            Route::get('/',[ProductController::class,'index'])->name('productIndex');
+//            Route::post('/',[CategoryController::class,'store'])->name('categoryStore');
+//            Route::post('/update',[CategoryController::class,'update'])->name('categoryUpdate');
+            Route::delete('/{product}',[ProductController::class,'destroy'])->name('productDestroy');
+            Route::post('/import/{product}',[ProductController::class,'import'])->name('productImport');
         });
 
     });

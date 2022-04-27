@@ -25,7 +25,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link product" href="{{route('admin')}}">
+                <a class="nav-link product" href="{{route('productIndex')}}">
                     <i class="bi bi-file-earmark-text"></i>
                     Products
                 </a>

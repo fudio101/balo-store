@@ -2,12 +2,27 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'category_id',
+        'name',
+        'avatar',
+        'images',
+        'detail',
+        'producer_id',
+        'quantity',
+        'quantity_sold',
+        'price',
+        'status',
+    ];
 
     protected static function boot()
     {
@@ -30,5 +45,10 @@ class Product extends Model
                 $model->updated_by = auth()->user()->id ?? 1;
             }
         });
+    }
+
+    protected function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

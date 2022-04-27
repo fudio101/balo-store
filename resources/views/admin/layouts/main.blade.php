@@ -46,9 +46,7 @@
     });
 
     $(document).ready(function () {
-
-        var temp = $(location).attr('pathname').split("/");
-        var path = temp[temp.length - 2];
+        path =
         var active = $(`.nav-link.${path}`);
         active.addClass("active");
 

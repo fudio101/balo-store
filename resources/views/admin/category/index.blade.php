@@ -43,17 +43,17 @@
                         <th scope="row">{{$loop->index+1}}</th>
                         <td>{{$item->name}}</td>
                         <td style="width: 50px">
-                            <center>
+                            <div style="text-align: center;">
                                 <button
                                     onclick="modifyCategory({{$item->id}}, '{{$item->name}}')"
                                     class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button>
-                            </center>
+                            </div>
                         </td>
                         <td style="width: 50px">
-                            <center>
+                            <div style="text-align: center;">
                                 <button onclick="deleteCategory({{$item->id}});" class="btn btn-danger"><i
                                         class="bi bi-x"></i></button>
-                            </center>
+                            </div>
                         </td>
                     </tr>
 
@@ -66,6 +66,12 @@
 
 @section('js')
     <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         function deleteCategory(id) {
             option = confirm('Are you sure you want to delete this category?')
             if (!option) return;
