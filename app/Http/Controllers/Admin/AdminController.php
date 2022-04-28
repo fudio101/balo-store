@@ -68,7 +68,7 @@ class AdminController extends Controller
     public function index(): Application|Factory|View
     {
         $total = Product::query()->where('status', '=', 1)->get()->count();
-        $total_ = Product::query()->select(DB::raw('SUM(`quantity`-`quantity_sold`) AS total_'))->where('status', '=',
+        $total_ = Product::query()->select(DB::raw('SUM(quantity -quantity_sold ) AS total_'))->where('status', '=',
             1)->get();
         $orders = Order::query()->where('status', '=', 1)->get()->count();
         $deliveringOders = Order::query()->where('order_status_id', '=', 2)->get()->count();
