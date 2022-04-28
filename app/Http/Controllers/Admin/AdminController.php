@@ -73,7 +73,7 @@ class AdminController extends Controller
         $orders = Order::query()->where('status', '=', 1)->get()->count();
         $deliveringOders = Order::query()->where('order_status_id', '=', 2)->get()->count();
         $deliveredOders = Order::query()->where('order_status_id', '=', 3)->get()->count();
-        $revenue = Order::query()->select(DB::raw('SUM(GREATEST(`total`-`coupon`,0)) AS revenue'))->where('status', '=',
+        $revenue = Order::query()->select(DB::raw('SUM(GREATEST(total - coupon,0)) AS revenue'))->where('status', '=',
             2)->orWhere('status', '=', 3)->get();
         return view('admin.index', [
             'title' => 'Dashboard Page',
