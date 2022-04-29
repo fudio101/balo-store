@@ -5,7 +5,7 @@
         <div class="col-md-12 table-responsive">
             <h3>Product Management</h3>
 
-            <a href="editor.php">
+            <a href="{{route('productCreate')}}">
                 <button class="btn btn-success">Add Product</button>
             </a>
 

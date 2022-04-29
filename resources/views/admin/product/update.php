@@ -1,10 +1,5 @@
 <?php
-$title = 'Add/Edit Products';
-$baseUrl = '../';
-require_once('../layouts/header.blade.php');
-
 $id = $fixedThumbnail = $imgs = $title = $price = $discount = $category_id = $description = '';
-require_once('form_save.php');
 
 $id = getGet('id');
 if ($id != '' && $id > 0) {
@@ -150,6 +145,3 @@ $producerItems = executeResult($sql);
 		]
 	});
 </script>
-<?php
-require_once('../layouts/footer.blade.php');
-?>

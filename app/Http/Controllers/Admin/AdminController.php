@@ -20,7 +20,9 @@ class AdminController extends Controller
     public function loginIndex()
     {
         if (!Auth::check()) {
-            return view('admin.authen.login');
+            return view('admin.authen.login', [
+                'tag' => 'admin',
+            ]);
         }
         return redirect()->intended('admin');
     }
@@ -78,11 +80,12 @@ class AdminController extends Controller
         return view('admin.index', [
             'title' => 'Dashboard Page',
             'total' => $total,
-            'total_' => $total_->get('total_') ? $total_->get('total_') : 0,
+            'total_' => $total_->get('total_') ?: 0,
             'orders' => $orders,
             'deliveringOders' => $deliveringOders,
             'deliveredOders' => $deliveredOders,
-            'revenue' => $revenue->get('revenue') ? $revenue->get('revenue') : 0,
+            'revenue' => $revenue->get('revenue') ?: 0,
+            'tag' => 'admin',
         ]);
     }
 

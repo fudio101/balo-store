@@ -31,7 +31,14 @@
         @include('admin.layouts.navbar')
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-5">
-            <!-- hien thi tung chuc nang cua trang quan tri START-->
+        @if($errors->any())
+            {!! implode('', $errors->all('
+            <script>
+                toastr.info(":message")
+            </script>
+            ')) !!}
+        @endif
+        <!-- hien thi tung chuc nang cua trang quan tri START-->
         @yield('content')
         <!-- END -->
         </main>
@@ -46,7 +53,7 @@
     });
 
     $(document).ready(function () {
-        path =
+        path = "{{$tag}}";
         var active = $(`.nav-link.${path}`);
         active.addClass("active");
 

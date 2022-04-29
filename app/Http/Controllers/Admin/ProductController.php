@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImportProductRequest;
+use App\Models\Category;
+use App\Models\Producer;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -11,6 +13,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Symfony\Component\Routing\Loader\Configurator\ImportConfigurator;
 
@@ -27,28 +30,59 @@ class ProductController extends Controller
         return view('admin.product.index', [
             'title' => 'Product Management',
             'data' => $data,
+            'tag' => 'product',
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
-        //
+        $categories = Category::all();
+        $producers = Producer::all();
+        return view('admin.product.create', [
+            'title' => 'Add Product',
+            'tag' => 'product',
+            'categories' => $categories,
+            'producers' => $producers,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreProductRequest  $request
-     * @return Response
+     * @param  StoreProductRequest  $request
+     * @return RedirectResponse
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request): RedirectResponse
     {
-        //
+        $avatar = $request->file('avatar')->store('public/photos/products');
+        $avatar = preg_replace('/public/', 'storage', $avatar, 1);
+
+        $result = array();
+        foreach ($request->file('images') as $item) {
+            $path = $item->store('public/photos/products');
+            $path = preg_replace('/public/', 'storage', $path, 1);
+            $result[] = $path;
+        }
+        $result = implode('#', $result);
+
+        $product = new Product();
+        $product->fill([
+            'name' => $request->input('name'),
+            'category_id' => $request->input('category_id'),
+            'avatar' => $avatar,
+            'images' => $result,
+            'detail' => $request->input('detail'),
+            'producer_id' => $request->input('producer_id'),
+            'price' => $request->input('price'),
+        ]);
+        $product->save();
+
+        return redirect()->route('productIndex');
     }
 
     /**

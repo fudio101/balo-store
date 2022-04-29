@@ -26,6 +26,7 @@ class CategoryController extends Controller
         return view('admin.category.index', [
             'title' => 'Product Category Management',
             'data' => $data,
+            'tag' => 'category',
         ]);
     }
 

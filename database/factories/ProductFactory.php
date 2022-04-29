@@ -20,7 +20,7 @@ class ProductFactory extends Factory
         return [
             'category_id' => Category::all()->random()->id,
             'name' => $this->faker->name,
-            'avatar' => $this->faker->imageUrl(640, 480, 'animals', true, 'cats'),
+            'avatar' => $this->faker->imageUrl(640, 480, 'cats'),
             'producer_id' => $this->faker->randomElement([1, 2, 3]),
             'quantity' => $this->faker->numberBetween(15, 3000),
             'price' => $this->faker->numberBetween(250000, 5000000),

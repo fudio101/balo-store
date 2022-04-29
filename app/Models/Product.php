@@ -51,4 +51,12 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    protected function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: static fn($value) => filter_var($value,
+                FILTER_VALIDATE_URL) ? $value : asset($value),
+        );
+    }
 }

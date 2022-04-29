@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('category_id')->constrained();
             $table->string('name');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->string('images')->nullable();
             $table->string('detail')->nullable();
             $table->foreignId('producer_id')->constrained();

@@ -43,7 +43,7 @@ $data = executeResult($sql);
 					<td>' . $item['payment_limit'] . '</td>
 					<td>' . $item['description'] . '</td>
                     <td style="width: 50px">
-						<a href="editor.php?id=' . $item['id'] . '"><center><button class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button></center></a>
+						<a href="create.blade.php?id=' . $item['id'] . '"><center><button class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button></center></a>
                     <td style="width: 50px">
                         <center><button onclick="deleteDiscount(' . $item['id'] . ')" class="btn btn-danger"><i class="bi bi-x"></i></button></center>
                     </td>

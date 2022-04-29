@@ -44,7 +44,7 @@ $data = executeResult($sql);
 					<td>' . $item['address'] . '</td>
 					<td>' . $item['role_name'] . '</td>
 					<td style="width: 50px">
-						<a href="editor.php?id=' . $item['id'] . '"><center><button class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button></center></a>
+						<a href="create.blade.php?id=' . $item['id'] . '"><center><button class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button></center></a>
 					</td>
 					<td style="width: 50px">';
 					if ($user['id'] != $item['id']) {
