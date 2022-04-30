@@ -49,7 +49,8 @@
                         <td style="width: 50px">
                             <a href="">
                                 <div style="text-align: center;">
-                                    <button class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button>
+                                    <button class="btn btn-warning"><a href="{{route('productEdit',$item->id)}}"><i
+                                                class="bi bi-pencil-fill"></i></a></button>
                                 </div>
                             </a>
                         </td>

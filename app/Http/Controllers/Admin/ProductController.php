@@ -100,11 +100,19 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  Product  $product
-     * @return Response
+     * @return Application|Factory|View
      */
-    public function edit(Product $product)
+    public function edit(Product $product): View|Factory|Application
     {
-        //
+        $categories = Category::all();
+        $producers = Producer::all();
+        return view('admin.product.update', [
+            'title' => 'Add Product',
+            'tag' => 'product',
+            'categories' => $categories,
+            'producers' => $producers,
+            'product' => $product,
+        ]);
     }
 
     /**
@@ -112,11 +120,39 @@ class ProductController extends Controller
      *
      * @param  UpdateProductRequest  $request
      * @param  Product  $product
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
-        //
+        if ($request->file('avatar')) {
+            $avatar = $request->file('avatar')->store('public/photos/products');
+            $avatar = preg_replace('/public/', 'storage', $avatar, 1);
+            $product->avatar = $avatar;
+        }
+
+        if ($request->file('images')) {
+            $result = array();
+            foreach ($request->file('images') as $item) {
+                $path = $item->store('public/photos/products');
+                $path = preg_replace('/public/', 'storage', $path, 1);
+                $result[] = $path;
+            }
+            $result = implode('#', $result);
+            $product->images = $result;
+        }
+
+        $product->category_id = $request->input('category_id');
+        $product->name = $request->input('name');
+        $product->detail = $request->input('detail');
+        $product->producer_id = $request->input('producer_id');
+        $product->price = $request->input('price');
+
+        $result = $product->save();
+        if ($result) {
+            return redirect()->route('productIndex');
+        } else {
+            return back()->withInput();
+        }
     }
 
     /**
