@@ -63,10 +63,12 @@ class ProductController extends Controller
         $avatar = preg_replace('/public/', 'storage', $avatar, 1);
 
         $result = array();
-        foreach ($request->file('images') as $item) {
-            $path = $item->store('public/photos/products');
-            $path = preg_replace('/public/', 'storage', $path, 1);
-            $result[] = $path;
+        if ($request->file('images')) {
+            foreach ($request->file('images') as $item) {
+                $path = $item->store('public/photos/products');
+                $path = preg_replace('/public/', 'storage', $path, 1);
+                $result[] = $path;
+            }
         }
         $result = implode('#', $result);
 
