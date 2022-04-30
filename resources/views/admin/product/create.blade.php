@@ -37,6 +37,7 @@
                                     <input type="file" class="form-control" id="thumbnail" name="avatar"
                                            accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
                                 </div>
+                                <img class="mt-2" src="#" id="category-img-tag" width="100%"  alt=""/>
 
                                 <div class="form-group mt-3">
                                     <label class="mb-2" for="imgs">Images:</label>
@@ -103,6 +104,22 @@
                 ['insert', ['link', 'picture', 'video']],
                 ['view', ['fullscreen', 'codeview', 'help']]
             ]
+        });
+
+        function readURL(input) {
+            if (input.target.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#category-img-tag').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.target.files[0]);
+            }
+        }
+
+        $("#thumbnail").change(function(event){
+            readURL(event);
         });
     </script>
 @endsection
