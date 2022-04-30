@@ -31,7 +31,7 @@
                         <th>{{$loop->index+1}}</th>
                         <td>
                             <div style="text-align: center;">
-                                <img src="{{$item->avatar}}" style="height: 100px; object-fit: contain;" alt=""/>
+                                <img src="{{$item->avatarUrl}}" style="height: 100px; object-fit: contain;" alt=""/>
                             </div>
                         </td>
                         <td> {{$item->name}}</td>

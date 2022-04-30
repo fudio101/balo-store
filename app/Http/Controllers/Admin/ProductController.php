@@ -15,6 +15,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Routing\Loader\Configurator\ImportConfigurator;
 
 class ProductController extends Controller
@@ -59,19 +60,15 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request): RedirectResponse
     {
-        $avatar = $request->file('avatar')->store('public/photos/products');
-        $avatar = preg_replace('/public/', 'storage', $avatar, 1);
-
+        $avatar = Storage::disk('s3')->putFile('photos/products', $request->file('avatar'));
         $result = array();
         if ($request->file('images')) {
             foreach ($request->file('images') as $item) {
-                $path = $item->store('public/photos/products');
-                $path = preg_replace('/public/', 'storage', $path, 1);
+                $path = Storage::disk('s3')->putFile('photos/products', $item);
                 $result[] = $path;
             }
         }
-        $result = implode('#', $result);
-
+        $result = count($result) > 0 ? implode('#', $result) : null;
         $product = new Product();
         $product->fill([
             'name' => $request->input('name'),
@@ -127,19 +124,29 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
         if ($request->file('avatar')) {
-            $avatar = $request->file('avatar')->store('public/photos/products');
-            $avatar = preg_replace('/public/', 'storage', $avatar, 1);
+            $avatar = $product->avatar;
+            if (!filter_var($avatar, FILTER_VALIDATE_URL)) {
+                Storage::disk('s3')->delete($avatar);
+            }
+            $avatar = Storage::disk('s3')->putFile('photos/products', $request->file('avatar'));;
             $product->avatar = $avatar;
         }
 
         if ($request->file('images')) {
+            $imgs = explode('#', $product->images);
+            if (count($imgs) > 0) {
+                foreach ($imgs as $img) {
+                    if (!filter_var($img, FILTER_VALIDATE_URL)) {
+                        Storage::disk('s3')->delete($img);
+                    }
+                }
+            }
             $result = array();
             foreach ($request->file('images') as $item) {
-                $path = $item->store('public/photos/products');
-                $path = preg_replace('/public/', 'storage', $path, 1);
+                $path = Storage::disk('s3')->putFile('photos/products', $item);
                 $result[] = $path;
             }
-            $result = implode('#', $result);
+            $result = count($result) > 0 ? implode('#', $result) : null;
             $product->images = $result;
         }
 
@@ -186,6 +193,21 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): JsonResponse
     {
+        $avatar = $product->avatar;
+        if (!filter_var($avatar, FILTER_VALIDATE_URL)) {
+            Storage::disk('s3')->delete($avatar);
+        }
+
+        $imgs = explode('#', $product->images);
+        if (count($imgs) > 0) {
+            foreach ($imgs as $img) {
+                if (!filter_var($img, FILTER_VALIDATE_URL)) {
+                    Storage::disk('s3')->delete($img);
+                }
+            }
+        }
+
+
         $result = $product->delete();
         return $result ? \response()->json([
             'error' => false,

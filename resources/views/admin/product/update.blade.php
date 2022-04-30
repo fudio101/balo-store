@@ -32,7 +32,7 @@
                                     <input type="file" class="form-control" id="thumbnail" name="avatar"
                                            accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
                                 </div>
-                                <img class="mt-2" src="{{asset($product->avatar)}}" id="category-img-tag" width="100%"
+                                <img class="mt-2" src="{{$product->avatarUrl}}" id="category-img-tag" width="100%"
                                      alt=""/>
 
                                 <div class="form-group mt-3">
