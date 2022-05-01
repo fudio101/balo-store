@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use phpDocumentor\Reflection\Types\Static_;
 
 class User extends Authenticatable
 {
@@ -52,6 +54,11 @@ class User extends Authenticatable
                 $model->updated_by = auth()->user()->id ?? 1;
             }
         });
+    }
+
+    protected function group()
+    {
+        return $this->belongsTo(UserGroup::class, 'role');
     }
 
     /**

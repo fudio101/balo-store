@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,21 +37,29 @@ Route::middleware('auth')->group(function () {
 
         #Category
         Route::prefix('categories')->group(function () {
-            Route::get('/',[CategoryController::class,'index'])->name('categoryIndex');
-            Route::post('/',[CategoryController::class,'store'])->name('categoryStore');
-            Route::post('/update',[CategoryController::class,'update'])->name('categoryUpdate');
-            Route::delete('/{category}',[CategoryController::class,'destroy'])->name('categoryDestroy');
+            Route::get('/', [CategoryController::class, 'index'])->name('categoryIndex');
+            Route::post('/', [CategoryController::class, 'store'])->name('categoryStore');
+            Route::post('/update', [CategoryController::class, 'update'])->name('categoryUpdate');
+            Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categoryDestroy');
         });
 
         #Product
         Route::prefix('products')->group(function () {
-            Route::get('/',[ProductController::class,'index'])->name('productIndex');
-            Route::get('/create',[ProductController::class,'create'])->name('productCreate');
-            Route::post('/store',[ProductController::class,'store'])->name('productStore');
-            Route::get('/edit/{product}',[ProductController::class,'edit'])->name('productEdit');
-            Route::post('/update/{product}',[ProductController::class,'update'])->name('productUpdate');
-            Route::delete('/{product}',[ProductController::class,'destroy'])->name('productDestroy');
-            Route::post('/import/{product}',[ProductController::class,'import'])->name('productImport');
+            Route::get('/', [ProductController::class, 'index'])->name('productIndex');
+            Route::get('/create', [ProductController::class, 'create'])->name('productCreate');
+            Route::post('/store', [ProductController::class, 'store'])->name('productStore');
+            Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('productEdit');
+            Route::post('/update/{product}', [ProductController::class, 'update'])->name('productUpdate');
+            Route::delete('/{product}', [ProductController::class, 'destroy'])->name('productDestroy');
+            Route::post('/import/{product}', [ProductController::class, 'import'])->name('productImport');
+        });
+
+        #User
+        Route::prefix('users')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('userIndex');
+            Route::get('/create', [UserController::class, 'create'])->name('userCreate');
+            Route::post('/store', [UserController::class, 'store'])->name('userStore');
+            Route::delete('/{user}', [UserController::class, 'destroy'])->name('userDestroy');
         });
 
     });

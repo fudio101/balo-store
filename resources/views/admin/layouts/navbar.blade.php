@@ -47,7 +47,7 @@
 
             @if(\Illuminate\Support\Facades\Auth::user()->role =="1")
                 <li class='nav-item'>
-                    <a class='nav-link user' href='{{route('admin')}}'>
+                    <a class='nav-link user' href='{{route('userIndex')}}'>
                         <i class='bi bi-people-fill'></i>
                         Users
                     </a>

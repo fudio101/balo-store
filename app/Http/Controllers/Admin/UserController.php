@@ -3,46 +3,78 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
+use App\Models\User;
+use App\Models\UserGroup;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
-        //
+        $data = User::query()->where('status', '=', 1)->get();
+        $user = Auth::user();
+        return view('admin.user.index', [
+            'title' => 'User Management',
+            'data' => $data,
+            'user' => $user,
+            'tag' => 'user',
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
-        //
+        $userGroups = UserGroup::all();
+        return view('admin.user.create', [
+            'title' => 'Add User Accounts',
+            'userGroups' => $userGroups,
+            'tag' => 'user',
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  StoreUserRequest  $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request): RedirectResponse
     {
-        //
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+        $user->gender = $request->input('gender');
+        $user->phone = $request->input('phone');
+        $user->address = $request->input('address');
+        $user->password = $request->input('password');
+        $result = $user->save();
+        return $result ? redirect()->route('userIndex') : redirect()->back()->withInput();
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -53,7 +85,7 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -63,9 +95,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -75,11 +107,18 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(User $user): JsonResponse
     {
-        //
+        $result = $user->delete();
+        return $result ? \response()->json([
+            'error' => false,
+            'message' => 'Delete successfully',
+        ]) : \response()->json([
+            'error' => true,
+            'message' => 'Can\'t delete user',
+        ]);
     }
 }
