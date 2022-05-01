@@ -40,6 +40,7 @@
                                     <input type="file" class="form-control" id="imgs" name="images[]"
                                            accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" multiple>
                                 </div>
+                                <div class="row" id="images-preview"></div>
 
                                 <div class="form-group mt-3">
                                     <label for="category_id">Product Category:</label>
@@ -116,6 +117,20 @@
 
         $("#thumbnail").change(function (event) {
             readURL(event);
+        });
+
+        $("#imgs").change(function (event) {
+            var imgsPv = $('#images-preview')
+            imgsPv.empty()
+            Array.from(event.target.files).forEach((element) => {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imgsPv.append(`<img class="col-6" src="${e.target.result}" alt="">`);
+                }
+
+                reader.readAsDataURL(element);
+            })
         });
     </script>
 @endsection
