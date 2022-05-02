@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', [UserController::class, 'create'])->name('userCreate');
             Route::post('/store', [UserController::class, 'store'])->name('userStore');
             Route::delete('/{user}', [UserController::class, 'destroy'])->name('userDestroy');
+            Route::get('/edit/{user}', [UserController::class, 'edit'])->name('userEdit');
+            Route::post('/update/{user}', [UserController::class, 'update'])->name('userUpdate');
         });
 
     });

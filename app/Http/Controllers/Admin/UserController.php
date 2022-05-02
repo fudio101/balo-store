@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Contracts\Foundation\Application;
@@ -65,7 +66,9 @@ class UserController extends Controller
         $user->gender = $request->input('gender');
         $user->phone = $request->input('phone');
         $user->address = $request->input('address');
-        $user->password = $request->input('password');
+        if ($request->input('password') != null) {
+            $user->password = $request->input('password');
+        }
         $result = $user->save();
         return $result ? redirect()->route('userIndex') : redirect()->back()->withInput();
     }
@@ -84,24 +87,38 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  User  $user
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit(User $user): View|Factory|Application
     {
-        //
+        $userGroups = UserGroup::all();
+        return view('admin.user.update', [
+            'title' => 'Edit User Accounts',
+            'userGroups' => $userGroups,
+            'tag' => 'user',
+            'user' => $user,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  int  $id
-     * @return Response
+     * @param  User  $user
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
-        //
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+        $user->gender = $request->input('gender');
+        $user->phone = $request->input('phone');
+        $user->address = $request->input('address');
+        $user->password = $request->input('password');
+        $result = $user->save();
+        return $result ? redirect()->route('userIndex') : redirect()->back()->withInput();
     }
 
     /**

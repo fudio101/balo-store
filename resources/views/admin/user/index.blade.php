@@ -34,7 +34,7 @@
                         <td>{{$item->address}}</td>
                         <td>{{$item->group->name}}</td>
                         <td style="width: 50px">
-                            <a href="{{1}}">
+                            <a href="{{route('userEdit',$user->id)}}">
                                 <div style="text-align: center;">
                                     <button class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button>
                                 </div>
