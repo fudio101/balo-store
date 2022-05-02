@@ -79,4 +79,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: static fn($value) => bcrypt($value),
+    );
+    }
 }
