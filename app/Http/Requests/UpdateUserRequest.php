@@ -25,7 +25,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|email|unique:App\Models\User,email,'.$this->user()->id,
+            'email' => 'required|email|unique:App\Models\User,email,'.$this->request->get('id'),
             'role' => 'required|integer',
             'gender' => 'required|integer',
             'phone' => 'nullable|string',

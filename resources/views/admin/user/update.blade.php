@@ -11,6 +11,7 @@
                 <div class="panel-body">
                     <form class="mb-5" action="{{route('userUpdate',$user->id)}}" method="post">
                         @csrf
+                        <input hidden name="id" value="{{$user->id}}">
                         <div class="form-group">
                             <label class="mt-3 mb-2" for="name">Full Name:</label>
                             <input type="text" class="form-control" id="name" name="name"

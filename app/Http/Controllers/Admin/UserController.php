@@ -66,9 +66,7 @@ class UserController extends Controller
         $user->gender = $request->input('gender');
         $user->phone = $request->input('phone');
         $user->address = $request->input('address');
-        if ($request->input('password') != null) {
-            $user->password = $request->input('password');
-        }
+        $user->password = $request->input('password');
         $result = $user->save();
         return $result ? redirect()->route('userIndex') : redirect()->back()->withInput();
     }
@@ -116,7 +114,10 @@ class UserController extends Controller
         $user->gender = $request->input('gender');
         $user->phone = $request->input('phone');
         $user->address = $request->input('address');
-        $user->password = $request->input('password');
+        if ($request->input('password') != null) {
+            $user->password = $request->input('password');
+        }
+//        dd($user);
         $result = $user->save();
         return $result ? redirect()->route('userIndex') : redirect()->back()->withInput();
     }
