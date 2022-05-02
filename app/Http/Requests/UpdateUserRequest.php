@@ -28,8 +28,8 @@ class UpdateUserRequest extends FormRequest
             'email' => 'required|email|unique:App\Models\User,email,'.$this->user()->id,
             'role' => 'required|integer',
             'gender' => 'required|integer',
-            'phone' => 'string',
-            'address' => 'string',
+            'phone' => 'nullable|string',
+            'address' => 'nullable|string',
             'password' => 'nullable|confirmed|min:6',
         ];
     }
