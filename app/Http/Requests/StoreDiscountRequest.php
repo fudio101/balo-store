@@ -13,7 +13,7 @@ class StoreDiscountRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class StoreDiscountRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'code' => ['required', 'string','unique:App\Models\Discount,code'],
+            'discount' => ['required', 'integer'],
+            'limit_number' => ['required', 'integer'],
+            'payment_limit' => ['required', 'integer'],
+            'expiration_date' => ['required', 'date'],
+            'description' => ['string', 'nullable'],
         ];
     }
 }

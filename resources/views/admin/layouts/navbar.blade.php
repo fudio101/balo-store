@@ -39,7 +39,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link discount" href="{{route('admin')}}">
+                <a class="nav-link discount" href="{{route('discountIndex')}}">
                     <i class="bi bi-minecart"></i>
                     Discount
                 </a>

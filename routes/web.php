@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,16 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{product}', [ProductController::class, 'update'])->name('productUpdate');
             Route::delete('/{product}', [ProductController::class, 'destroy'])->name('productDestroy');
             Route::post('/import/{product}', [ProductController::class, 'import'])->name('productImport');
+        });
+
+        #Discount
+        Route::prefix('discounts')->group(function () {
+            Route::get('/', [DiscountController::class, 'index'])->name('discountIndex');
+            Route::get('/create', [DiscountController::class, 'create'])->name('discountCreate');
+            Route::post('/store', [DiscountController::class, 'store'])->name('discountStore');
+            Route::get('/edit/{discount}', [DiscountController::class, 'edit'])->name('discountEdit');
+            Route::post('/update/{discount}', [DiscountController::class, 'update'])->name('discountUpdate');
+            Route::delete('/{discount}', [DiscountController::class, 'destroy'])->name('discountDestroy');
         });
 
         #User

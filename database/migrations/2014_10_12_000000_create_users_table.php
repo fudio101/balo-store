@@ -40,6 +40,15 @@ return new class extends Migration {
             'gender' => 1,
             'password' => bcrypt('Ng01637202484'),
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'username' => 'admin',
+            'role' => 1,
+            'gender' => 1,
+            'password' => bcrypt('Admin123'),
+        ]);
     }
 
     /**

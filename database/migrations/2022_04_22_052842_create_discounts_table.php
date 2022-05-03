@@ -14,12 +14,13 @@ return new class extends Migration {
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->string('discount')->comment('Mã giảm giá');
-            $table->integer('limit_number')->comment('Giá giảm');
-            $table->date('number_used')->comment('Giới hạn lượt mua');
-            $table->integer('payment_limit')->comment('Ngày hết hạn');
-            $table->string('description')->comment('Giá trị đơn hàng tối thiểu');
+            $table->string('code')->comment('Mã giảm giá');
+            $table->string('discount')->comment('Giá giảm');
+            $table->integer('limit_number')->comment('Giới hạn lượt mua');
+            $table->integer('number_used')->default(0)->comment('Số lượt đã dùng');
+            $table->integer('payment_limit')->comment('Giá trị đơn hàng tối thiểu');
+            $table->dateTime('expiration_date')->comment('Ngày hết hạn');
+            $table->string('description')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
