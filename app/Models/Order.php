@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Model
 {
@@ -40,5 +42,16 @@ class Order extends Model
                 $model->updated_by = auth()->user()->id ?? 1;
             }
         });
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddressAttribute(): string
+    {
+        $district = $this->belongsTo(District::class, 'district_id')->get()[0];
+        $province = $district->belongsTo(Province::class, 'province_id')->get()[0];
+
+        return $this->detailed_address.', '.$district->name.', '.$province->name;
     }
 }

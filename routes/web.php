@@ -59,6 +59,8 @@ Route::middleware('auth')->group(function () {
         #Product
         Route::prefix('orders')->group(function () {
             Route::get('/', [OrderController::class, 'index'])->name('orderIndex');
+            Route::get('/show/{order}', [OrderController::class, 'show'])->name('orderShow');
+            Route::post('/update-status', [OrderController::class, 'updateStatus'])->name('orderUpdateStatus');
 //            Route::get('/create', [ProductController::class, 'create'])->name('productCreate');
 //            Route::post('/store', [ProductController::class, 'store'])->name('productStore');
 //            Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('productEdit');
