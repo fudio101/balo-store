@@ -32,7 +32,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link order" href="{{route('admin')}}">
+                <a class="nav-link order" href="{{route('orderIndex')}}">
                     <i class="bi bi-minecart"></i>
                     Orders
                 </a>

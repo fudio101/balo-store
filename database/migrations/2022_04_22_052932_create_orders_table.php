@@ -14,10 +14,10 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('order_code');
+            $table->string('order_code')->unique();
             $table->string('name');
             $table->string('phone');
-            $table->string('email')->nullable();
+            $table->string('email');
             $table->bigInteger('total')->default(0);
             $table->bigInteger('shipping_cost')->default(0);
             $table->bigInteger('coupon')->default(0);

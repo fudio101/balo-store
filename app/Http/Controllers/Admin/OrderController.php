@@ -19,14 +19,13 @@ class OrderController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        $sql = "SELECT `db_order`.`id`, `db_order`.`orderCode`, `db_order`.`fullname`, `db_order`.`phone`, `db_order`.`money`,
-		`db_order`.`price_ship`, `db_order`.`coupon`, `db_order`.`province`, `db_order`.`district`, `db_order`.`address`,
-		`db_order`.`order_status`, `db_order`.`created`, `db_order`.`status_code`, `db_customer`.`address`, `db_customer`.`email`
-		FROM `db_order`, `db_customer`
-		WHERE `db_order`.`phone`=`db_customer`.`phone` AND `db_order`.`order_status`=1
-		ORDER BY `db_order`.`status_code` ASC, `db_order`.`created` ASC;";
+        $data = Order::query()->where('status', '=', 1)
+            ->orderBy('order_status_id', 'asc')
+            ->orderBy('created_at', 'asc')->get();
+        dd($data);
         return view('admin.order.index', [
             'title' => 'Order Management',
+            'data' => $data,
             'tag' => 'order',
         ]);
     }
