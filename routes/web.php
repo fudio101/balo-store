@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,17 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{product}', [ProductController::class, 'update'])->name('productUpdate');
             Route::delete('/{product}', [ProductController::class, 'destroy'])->name('productDestroy');
             Route::post('/import/{product}', [ProductController::class, 'import'])->name('productImport');
+        });
+
+        #Product
+        Route::prefix('orders')->group(function () {
+            Route::get('/', [OrderController::class, 'index'])->name('orderIndex');
+//            Route::get('/create', [ProductController::class, 'create'])->name('productCreate');
+//            Route::post('/store', [ProductController::class, 'store'])->name('productStore');
+//            Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('productEdit');
+//            Route::post('/update/{product}', [ProductController::class, 'update'])->name('productUpdate');
+//            Route::delete('/{product}', [ProductController::class, 'destroy'])->name('productDestroy');
+//            Route::post('/import/{product}', [ProductController::class, 'import'])->name('productImport');
         });
 
         #Discount

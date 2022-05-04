@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -109,6 +110,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category): JsonResponse
     {
+        if (Product::query()->where('category_id', '=', $category->id)->count() == 0) {
+            return \response()->json([
+                'error' => true,
+                'message' => 'Category still products',
+            ]);
+        }
         $result = $category->delete();
         return $result ? \response()->json([
             'error' => false,

@@ -6,17 +6,29 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
-        //
+        $sql = "SELECT `db_order`.`id`, `db_order`.`orderCode`, `db_order`.`fullname`, `db_order`.`phone`, `db_order`.`money`,
+		`db_order`.`price_ship`, `db_order`.`coupon`, `db_order`.`province`, `db_order`.`district`, `db_order`.`address`,
+		`db_order`.`order_status`, `db_order`.`created`, `db_order`.`status_code`, `db_customer`.`address`, `db_customer`.`email`
+		FROM `db_order`, `db_customer`
+		WHERE `db_order`.`phone`=`db_customer`.`phone` AND `db_order`.`order_status`=1
+		ORDER BY `db_order`.`status_code` ASC, `db_order`.`created` ASC;";
+        return view('admin.order.index', [
+            'title' => 'Order Management',
+            'tag' => 'order',
+        ]);
     }
 
     /**
