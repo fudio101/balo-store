@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->foreignId('category_id')->constrained();
             $table->string('name');
             $table->string('avatar')->nullable();
-            $table->string('images')->nullable();
+            $table->string('images', 1024)->nullable();
             $table->text('detail')->nullable();
             $table->foreignId('producer_id')->constrained();
             $table->integer('quantity')->default(0);
