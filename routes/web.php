@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,20 +20,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[HomeController::class,'index'])->name('homepage');
+Route::get('/product/{product}',[\App\Http\Controllers\ProductController::class,'index'])->name('product');
 //Admin login
 Route::get('/admin/login', [AdminController::class, 'loginIndex'])->name('login');
 Route::post('/admin/login', [AdminController::class, 'login']);
 
 //Admin
 Route::middleware('auth')->group(function () {
-    Route::post('/admin/logout', [AdminController::class, 'logout'])->name('logout');
-
-    Route::get('/', [AdminController::class, 'index']);
 
     Route::prefix('admin')->group(function () {
+
+        Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 
         Route::get('/', [AdminController::class, 'index'])->name('admin');
         Route::get('main', [AdminController::class, 'index']);

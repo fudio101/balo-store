@@ -133,7 +133,7 @@ class ProductController extends Controller
         }
 
         if ($request->file('images')) {
-            $imgs = explode('#', $product->images);
+            $imgs = $product->images;
             if (count($imgs) > 0) {
                 foreach ($imgs as $img) {
                     if (!filter_var($img, FILTER_VALIDATE_URL)) {
@@ -198,7 +198,7 @@ class ProductController extends Controller
             Storage::disk('s3')->delete($avatar);
         }
 
-        $imgs = explode('#', $product->images);
+        $imgs = $product->images;
         if (count($imgs) > 0) {
             foreach ($imgs as $img) {
                 if (!filter_var($img, FILTER_VALIDATE_URL)) {

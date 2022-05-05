@@ -53,6 +53,30 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    protected function images(): Attribute
+    {
+        return Attribute::get(static function ($value) {
+            return explode('#', $value);
+        });
+    }
+
+    protected function imageUrls(): Attribute
+    {
+        return Attribute::get(static function ($value, $attributes) {
+            $result = $attributes['images'];
+            if ($result) {
+                $result = array_merge([$attributes['avatar']], explode('#', $result));
+            } else {
+                $result = [$attributes['avatar']];
+            }
+            foreach ($result as $key => $item) {
+                $result[$key] = filter_var($item,
+                    FILTER_VALIDATE_URL) ? $item : Storage::disk('s3')->temporaryUrl($item, now()->addMinutes(5));
+            }
+            return $result;
+        });
+    }
+
     protected function avatarUrl(): Attribute
     {
         return Attribute::make(
