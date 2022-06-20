@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts._main')
 
 @section('content')
     <div class="container">
@@ -208,7 +208,7 @@
 
 @section('js')
     <!-- javasprit -->
-    <script src="{{asset('assets/js/sanpham.js')}}"></script>
+    <script src="{{asset('assets/js1/sanpham.js1')}}"></script>
     <script>
         $(document).ready(function () {
             $('#addToCart').click(function () {

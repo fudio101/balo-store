@@ -12,16 +12,16 @@
 <!--[if lt IE 9]>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.1/respond.js"></script>
 <![endif]-->
-<link rel="stylesheet" href="{{asset('assets/css/balo.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/balobase.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/sanpham.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/category.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/thanhtoan.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/giohang.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/loading.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/gird.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
-<link rel="stylesheet" href="{{asset('assets/icon/fontawesome-free-5.15.3/css/all.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css1/balo.css1')}}">
+<link rel="stylesheet" href="{{asset('assets/css1/balobase.css1')}}">
+<link rel="stylesheet" href="{{asset('assets/css1/sanpham.css1')}}">
+<link rel="stylesheet" href="{{asset('assets/css1/category.css1')}}">
+<link rel="stylesheet" href="{{asset('assets/css1/thanhtoan.css1')}}">
+<link rel="stylesheet" href="{{asset('assets/css1/giohang.css1')}}">
+<link rel="stylesheet" href="{{asset('assets/css1/loading.css1')}}">
+<link rel="stylesheet" href="{{asset('assets/css1/gird.css1')}}">
+<link rel="stylesheet" href="{{asset('assets/css1/responsive.css1')}}">
+<link rel="stylesheet" href="{{asset('assets/icon/fontawesome-free-5.15.3/css1/all.min.css1')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="

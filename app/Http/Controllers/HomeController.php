@@ -63,18 +63,19 @@ class HomeController extends Controller
         foreach ($categories as $item) {
             $catProducts[] = Product::query()->where('category_id', '=', $item->id)->limit(5)->get();
         }
-        return view('index', [
-            'title' => 'Balo Store',
-            'cart' => $cart,
-            'total' => $total,
-            'counter' => $counter,
-            'categories' => $categories,
-            'maxPage' => $maxPage,
-            'products' => $products,
-            'currentPage' => $currentPage,
-            'pageStart' => $pageStart,
-            'pageEnd' => $pageEnd,
-            'catProducts' => $catProducts,
-        ]);
+        return \view('home');
+//        return view('index', [
+//            'title' => 'Balo Store',
+//            'cart' => $cart,
+//            'total' => $total,
+//            'counter' => $counter,
+//            'categories' => $categories,
+//            'maxPage' => $maxPage,
+//            'products' => $products,
+//            'currentPage' => $currentPage,
+//            'pageStart' => $pageStart,
+//            'pageEnd' => $pageEnd,
+//            'catProducts' => $catProducts,
+//        ]);
     }
 }

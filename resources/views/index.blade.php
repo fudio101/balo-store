@@ -19,7 +19,7 @@
 {{--                <label for="bottom_2" class="container-navigation__bar"></label>--}}
 {{--            </div>--}}
 {{--        </div>--}}
-@extends('layouts.main')
+@extends('layouts._main')
 
 @section('content')
     <div class="container-menu">
