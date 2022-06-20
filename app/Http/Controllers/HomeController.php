@@ -29,56 +29,17 @@ class HomeController extends Controller
      */
     final public function index(Request $request): Factory|View|Application
     {
-        $cart = $this->cartService->getCart();
-        $total = $this->cartService->getTotal();
-        $counter = $this->cartService->count();
-        $categories = Category::all();
+        $products = Product::query()
+            ->where('status', '=', 1)
+            ->whereRaw('quantity - quantity_sold > 0')
+            ->orderBy('quantity_sold', 'desc')
+            ->limit(3)
+            ->get();
 
-        //Pagination
-        //calculate
-        $totalProduct = Product::query()->where('status', '=', 1)->count();
-        $numProductsPerPage = 10;
-        $maxPage = (int) ceil($totalProduct / $numProductsPerPage);
-        //get curent page
-        $currentPage = $request->get('page', 1);
-        $currentPage = $currentPage < 1 ? 1 : $currentPage;
-        $currentPage = $currentPage > $maxPage ? $maxPage : $currentPage;
-
-        $pageStart = $currentPage - 2;
-        $pageEnd = $currentPage + 2;
-
-        if ($currentPage < 4) {
-            $pageStart = 1;
-            $pageEnd = $maxPage > 5 ? ($pageStart + 4) : $maxPage;
-        } elseif ($currentPage > $maxPage - 3) {
-            $pageEnd = $maxPage;
-            $pageStart = $maxPage > 5 ? ($pageEnd - 4) : 1;
-        }
-
-        $offset = ($currentPage - 1) * $numProductsPerPage;
-
-        $products = Product::query()->where('status', '=', 1)->skip($offset)->take($numProductsPerPage)->get();
-
-        $catProducts = [];
-        foreach ($categories as $item) {
-            $catProducts[] = Product::query()->where('category_id', '=', $item->id)->limit(5)->get();
-        }
         return \view('home', [
             'title' => 'Balo store',
+            'products' => $products,
         ]);
-//        return view('index', [
-//            'title' => 'Balo Store',
-//            'cart' => $cart,
-//            'total' => $total,
-//            'counter' => $counter,
-//            'categories' => $categories,
-//            'maxPage' => $maxPage,
-//            'products' => $products,
-//            'currentPage' => $currentPage,
-//            'pageStart' => $pageStart,
-//            'pageEnd' => $pageEnd,
-//            'catProducts' => $catProducts,
-//        ]);
     }
 
     /**
@@ -100,17 +61,6 @@ class HomeController extends Controller
         return \view('about', [
             'title' => 'About',
             'secondTitle' => 'We sale fresh fruits',
-        ]);
-    }
-
-    /**
-     * @return Factory|View|Application
-     */
-    final public function cart(): Factory|View|Application
-    {
-        return \view('cart', [
-            'title' => 'Cart',
-            'secondTitle' => 'Best of your mind',
         ]);
     }
 

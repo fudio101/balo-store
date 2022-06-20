@@ -24,6 +24,7 @@ class Product extends Model
         'price',
         'status',
     ];
+    private mixed $category;
 
     protected static function boot()
     {
@@ -57,6 +58,13 @@ class Product extends Model
     {
         return Attribute::get(static function ($value) {
             return explode('#', $value);
+        });
+    }
+
+    protected function vndPrice(): Attribute
+    {
+        return Attribute::get(static function ($value, $attributes) {
+            return number_format($attributes['price'], 0, '', ',');
         });
     }
 

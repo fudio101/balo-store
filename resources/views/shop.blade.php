@@ -20,6 +20,7 @@
                             <li data-filter=".strawberry">Strawberry</li>
                             <li data-filter=".berry">Berry</li>
                             <li data-filter=".lemon">Lemon</li>
+                            <li data-filter=".avocado">Avocado</li>
                         </ul>
                     </div>
                 </div>
@@ -29,7 +30,7 @@
                 <div class="col-lg-4 col-md-6 text-center strawberry">
                     <div class="single-product-item">
                         <div class="product-image">
-                            <a href="{{route('product',1)}}"><img src="assets/img/products/product-img-1.jpg" alt=""></a>
+                            <a href="{{route('product',1)}}"><img src="{{asset('assets/img/products/product-img-1.jpg')}}" alt=""></a>
                         </div>
                         <h3>Strawberry</h3>
                         <p class="product-price"><span>Per Kg</span> 85$ </p>
@@ -56,7 +57,7 @@
                         <a href="{{route('cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 text-center">
+                <div class="col-lg-4 col-md-6 text-center avocado">
                     <div class="single-product-item">
                         <div class="product-image">
                             <a href="{{route('product',1)}}"><img src="assets/img/products/product-img-4.jpg" alt=""></a>

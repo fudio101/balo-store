@@ -4,6 +4,7 @@ namespace App\Service;
 
 
 use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -23,10 +24,7 @@ class CartService
      */
     final public function getCart(): mixed
     {
-        if (session()->has('cart')) {
-            return session()->get('cart');
-        }
-        return null;
+        return session()->get('cart', []);
     }
 
     /**
@@ -39,19 +37,16 @@ class CartService
     final public function addCart(int $id, int $quantity): bool
     {
         $cart = $this->getCart();
-        if (!$cart) {
-            return false;
-        }
         foreach ($cart as $key => $item) {
             if (((int) $item[0]) === $id) {
                 $item[1] += $quantity;
                 $cart[$key] = $item;
-                session()->put($cart);
+                session()->put('cart', $cart);
                 return true;
             }
         }
         $cart[] = [$id, $quantity];
-        session()->put($cart);
+        session()->put('cart', $cart);
         return true;
     }
 

@@ -26,30 +26,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="table-body-row">
-                                <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-                                <td class="product-image"><img src="{{asset('assets/img/products/product-img-1.jpg')}}" alt=""></td>
-                                <td class="product-name">Strawberry</td>
-                                <td class="product-price">$85</td>
-                                <td class="product-quantity"><input type="number" placeholder="0"></td>
-                                <td class="product-total">1</td>
-                            </tr>
-                            <tr class="table-body-row">
-                                <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-                                <td class="product-image"><img src="{{asset('assets/img/products/product-img-2.jpg')}}" alt=""></td>
-                                <td class="product-name">Berry</td>
-                                <td class="product-price">$70</td>
-                                <td class="product-quantity"><input type="number" placeholder="0"></td>
-                                <td class="product-total">1</td>
-                            </tr>
-                            <tr class="table-body-row">
-                                <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-                                <td class="product-image"><img src="{{asset('assets/img/products/product-img-3.jpg')}}" alt=""></td>
-                                <td class="product-name">Lemon</td>
-                                <td class="product-price">$35</td>
-                                <td class="product-quantity"><input type="number" placeholder="0"></td>
-                                <td class="product-total">1</td>
-                            </tr>
+                            @foreach($cart as $item)
+                                <tr class="table-body-row">
+                                    <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
+                                    <td class="product-image"><img
+                                            src="{{$item[0]->avatar?$item[0]->avatarUrl:asset('assets/img/products/product-img-1.jpg')}}"
+                                            alt="">
+                                    </td>
+                                    <td class="product-name">{{$item[0]->name}}</td>
+                                    <td class="product-price">{{$item[0]->vndPrice}} VND</td>
+                                    <td class="product-quantity"><input type="number" placeholder="{{$item[1]}}"></td>
+                                    <td class="product-total">{{$item[2]}}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -67,15 +56,15 @@
                             <tbody>
                             <tr class="total-data">
                                 <td><strong>Subtotal: </strong></td>
-                                <td>$500</td>
+                                <td>{{ number_format($total, 0, '', ',')}} VND</td>
                             </tr>
                             <tr class="total-data">
                                 <td><strong>Shipping: </strong></td>
-                                <td>$45</td>
+                                <td>25,000 VND</td>
                             </tr>
                             <tr class="total-data">
                                 <td><strong>Total: </strong></td>
-                                <td>$545</td>
+                                <td>{{ number_format($total + 25000, 0, '', ',')}} VND</td>
                             </tr>
                             </tbody>
                         </table>
