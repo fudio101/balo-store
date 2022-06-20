@@ -7,7 +7,7 @@
                 <div class="container-folder__header">
                     <a href="index.blade.php" class="container-folder__header-href">Trang chủ</a>
                     <span class="container-folder__header-span">/</span>
-                    <a href="./category.php?catid={{'?= $product[catid] ?'}}"
+                    <a href="{{route('category',$category->id)}}"
                        class="container-folder__header-link">{{$product->category->name}}</a>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                                             ngay trước khi hết hàng nhé bạn!
                                         </p>
                                         <p class="container-info__category">Danh mục:
-                                            <a href="./category.php?catid={{'$product[catid'}}"
+                                            <a href="{{route('category',$category->id)}}"
                                                class="container-info__category-link">
                                                 {{$category->name}}
                                             </a>

@@ -165,7 +165,7 @@
                             <ul class="hearder-footer__sugget-list">
 
                                 @foreach ($categories as $key => $item)
-                                    <a href="./category.php?id={{'?= $value[id] ?'}}"
+                                    <a href="{{route('category',[$item->id])}}"
                                        class="hearder-footer__sugget-link">
                                         <li class="hearder-footer__sugget-li">{{$item->name}}</li>
                                     </a>

@@ -109,7 +109,7 @@
 
                         @foreach ($catProducts[$key] as $item)
                             <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="product.php?id={{$item->id}}" class="container-home__fb">
+                                <a href="{{route('product',$item->id)}}" class="container-home__fb">
                                     <div class="container-vali">
                                         <div class="container-vali__img">
                                             <img src="{{$item->avatarUrl}}" alt=""

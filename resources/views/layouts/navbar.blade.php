@@ -27,7 +27,7 @@
             <ul class="hearder-footer__sugget-list hearder-footer__menu-cart hearder-footer__menu-cart-product">
 
                 @foreach ($categories as $key => $item)
-                    <a href="{{'?= $baseUrl ?'}}tuixach.html" class="hearder-footer__sugget-link">
+                    <a href="{{route('category',$item->id)}}" class="hearder-footer__sugget-link">
                         <li class="hearder-footer__sugget-li">{{$item->name}}</li>
                     </a>
                 @endforeach
