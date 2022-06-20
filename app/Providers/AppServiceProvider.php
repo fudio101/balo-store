@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,8 +22,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    final public function boot()
     {
-        //
+        View::composer(['errors::404'], static function ($view) {
+            $view->with([
+                'title' => '404 - Not Found',
+                'secondTitle' => 'Something went wrong',
+            ]);
+        });
     }
 }

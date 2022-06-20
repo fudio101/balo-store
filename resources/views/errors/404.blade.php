@@ -18,7 +18,7 @@
                             <i class="far fa-sad-cry"></i>
                             <h1>Oops! Not Found.</h1>
                             <p>The page you requested for is not found.</p>
-                            <a href="index.html" class="boxed-btn">Back to Home</a>
+                            <a href="{{route('homepage')}}" class="boxed-btn">Back to Home</a>
                         </div>
                     </div>
                 </div>

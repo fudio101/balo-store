@@ -31,9 +31,8 @@
                     <h2 class="widget-title">Pages</h2>
                     <ul>
                         <li><a href="{{route('homepage')}}">Home</a></li>
+                        <li><a href="{{route('shop')}}">Shop</a></li>
                         <li><a href="{{route('about')}}">About</a></li>
-                        <li><a href="services.html">Shop</a></li>
-                        <li><a href="news.html">News</a></li>
                         <li><a href="{{route('contact')}}">Contact</a></li>
                     </ul>
                 </div>
@@ -42,7 +41,7 @@
                 <div class="footer-box subscribe">
                     <h2 class="widget-title">Subscribe</h2>
                     <p>Subscribe to our mailing list to get the latest updates.</p>
-                    <form action="index.html">
+                    <form action="{{route('homepage')}}">
                         <input type="email" placeholder="Email">
                         <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </form>

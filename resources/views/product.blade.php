@@ -23,7 +23,7 @@
                         <p class="single-product-pricing"><span>Per Kg</span> $50</p>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta sint dignissimos, rem commodi cum voluptatem quae reprehenderit repudiandae ea tempora incidunt ipsa, quisquam animi perferendis eos eum modi! Tempora, earum.</p>
                         <div class="single-product-form">
-                            <form action="index.html">
+                            <form action="{{route('homepage')}}">
                                 <input type="number" placeholder="0">
                             </form>
                             <a href="{{route('cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>

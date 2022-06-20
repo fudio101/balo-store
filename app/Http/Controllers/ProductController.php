@@ -29,7 +29,10 @@ class ProductController extends Controller
      */
     final public function index(): View|Factory|Application
     {
-        return \view('shop');
+        return \view('shop', [
+            'title' => 'Shop',
+            'secondTitle' => 'Fresh and Organic',
+        ]);
     }
 
     /**

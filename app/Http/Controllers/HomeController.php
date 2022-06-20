@@ -63,7 +63,9 @@ class HomeController extends Controller
         foreach ($categories as $item) {
             $catProducts[] = Product::query()->where('category_id', '=', $item->id)->limit(5)->get();
         }
-        return \view('home');
+        return \view('home', [
+            'title' => 'Balo store',
+        ]);
 //        return view('index', [
 //            'title' => 'Balo Store',
 //            'cart' => $cart,
@@ -84,7 +86,10 @@ class HomeController extends Controller
      */
     final public function contact(): Factory|View|Application
     {
-        return \view('contact');
+        return \view('contact', [
+            'title' => 'Contact',
+            'secondTitle' => 'Sent what you want',
+        ]);
     }
 
     /**
@@ -92,7 +97,10 @@ class HomeController extends Controller
      */
     final public function about(): Factory|View|Application
     {
-        return \view('about');
+        return \view('about', [
+            'title' => 'About',
+            'secondTitle' => 'We sale fresh fruits',
+        ]);
     }
 
     /**
@@ -100,7 +108,10 @@ class HomeController extends Controller
      */
     final public function cart(): Factory|View|Application
     {
-        return \view('cart');
+        return \view('cart', [
+            'title' => 'Cart',
+            'secondTitle' => 'Best of your mind',
+        ]);
     }
 
     /**
@@ -108,6 +119,9 @@ class HomeController extends Controller
      */
     final public function checkout(): Factory|View|Application
     {
-        return \view('checkout');
+        return \view('checkout', [
+            'title' => 'Checkout',
+            'secondTitle' => 'One more step',
+        ]);
     }
 }
