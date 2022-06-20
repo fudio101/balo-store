@@ -78,4 +78,36 @@ class HomeController extends Controller
 //            'catProducts' => $catProducts,
 //        ]);
     }
+
+    /**
+     * @return Factory|View|Application
+     */
+    final public function contact(): Factory|View|Application
+    {
+        return \view('contact');
+    }
+
+    /**
+     * @return Factory|View|Application
+     */
+    final public function about(): Factory|View|Application
+    {
+        return \view('about');
+    }
+
+    /**
+     * @return Factory|View|Application
+     */
+    final public function cart(): Factory|View|Application
+    {
+        return \view('cart');
+    }
+
+    /**
+     * @return Factory|View|Application
+     */
+    final public function checkout(): Factory|View|Application
+    {
+        return \view('checkout');
+    }
 }

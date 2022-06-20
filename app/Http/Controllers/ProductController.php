@@ -25,37 +25,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Product  $product
      * @return Application|Factory|View
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
      */
-    final public function index(Product $product): View|Factory|Application
+    final public function index(): View|Factory|Application
     {
-        $cart = $this->cartService->getCart();
-        $total = $this->cartService->getTotal();
-        $counter = $this->cartService->count();
-        $categories = Category::all();
-
-        //select 5 products of first db_product with the greatest number_buy and status = 1
-        $products = Product::query()->where('status', '=', 1)->orderBy('quantity_sold', 'desc')->limit(5)->get();
-
-        //select random 4 products in db_product and status = 1
-        $products2 = Product::query()->inRandomOrder()->limit(4)->get();
-
-        $category = Category::query()->find($product->category_id);
-
-        return view('product', [
-            'title' => 'Balo Store',
-            'cart' => $cart,
-            'total' => $total,
-            'counter' => $counter,
-            'categories' => $categories,
-            'category' => $category,
-            'product' => $product,
-            'products' => $products,
-            'products2' => $products2,
-        ]);
+        return \view('shop');
     }
 
     /**
@@ -82,18 +56,18 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param  Product  $product
+     * @return Application|Factory|View
      */
-    public function show(Product $product)
+    final public function show(Product $product): View|Factory|Application
     {
-        //
+        return \view('product');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  Product  $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -105,7 +79,7 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateProductRequest  $request
-     * @param  \App\Models\Product  $product
+     * @param  Product  $product
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateProductRequest $request, Product $product)
@@ -116,7 +90,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  Product  $product
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)

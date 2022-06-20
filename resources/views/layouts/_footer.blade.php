@@ -30,11 +30,11 @@
                 <div class="footer-box pages">
                     <h2 class="widget-title">Pages</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
+                        <li><a href="{{route('homepage')}}">Home</a></li>
+                        <li><a href="{{route('about')}}">About</a></li>
                         <li><a href="services.html">Shop</a></li>
                         <li><a href="news.html">News</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="{{route('contact')}}">Contact</a></li>
                     </ul>
                 </div>
             </div>

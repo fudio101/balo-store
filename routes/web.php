@@ -21,8 +21,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[HomeController::class,'index'])->name('homepage');
-Route::get('/product/{product}',[\App\Http\Controllers\ProductController::class,'index'])->name('product');
-Route::get('/category/{category}',[\App\Http\Controllers\CategoryController::class,'index'])->name('category');
+Route::get('/about',[HomeController::class,'about'])->name('about');
+Route::get('/contact',[HomeController::class,'contact'])->name('contact');
+Route::get('/cart',[HomeController::class,'cart'])->name('cart');
+Route::get('/checkout',[HomeController::class,'checkout'])->name('checkout');
+Route::get('/shop',[\App\Http\Controllers\ProductController::class,'index'])->name('shop');
+Route::get('/product/{product}',[\App\Http\Controllers\ProductController::class,'show'])->name('product');
 //Admin login
 Route::get('/admin/login', [AdminController::class, 'loginIndex'])->name('login');
 Route::post('/admin/login', [AdminController::class, 'login']);
