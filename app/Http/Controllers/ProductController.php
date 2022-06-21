@@ -35,11 +35,17 @@ class ProductController extends Controller
      */
     final public function index(): View|Factory|Application
     {
+        $products = Product::query()
+            ->where('status', '=', 1)
+            ->whereRaw('quantity - quantity_sold > 0')
+            ->orderBy('quantity_sold', 'desc')
+            ->paginate(15);
         $categories = Category::all();
         return \view('shop', [
             'title' => 'Shop',
             'secondTitle' => 'Everything you need',
             'categories' => $categories,
+            'products' => $products,
         ]);
     }
 

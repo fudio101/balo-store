@@ -17,91 +17,40 @@
                     <div class="product-filters">
                         <ul>
                             <li class="active" data-filter="*">All</li>
-                            <li data-filter=".strawberry">Strawberry</li>
-                            <li data-filter=".berry">Berry</li>
-                            <li data-filter=".lemon">Lemon</li>
-                            <li data-filter=".avocado">Avocado</li>
+                            @foreach($categories as $categoty)
+                                <li data-filter=".{{Illuminate\Support\Str::slug($categoty->name, '-')}}">{{$categoty->name}}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="row product-lists">
-                <div class="col-lg-4 col-md-6 text-center strawberry">
-                    <div class="single-product-item">
-                        <div class="product-image">
-                            <a href="{{route('product',1)}}"><img src="{{asset('assets/img/products/product-img-1.jpg')}}" alt=""></a>
+                @foreach($products as $product)
+                    <div
+                        class="col-lg-4 col-md-6 text-center {{Illuminate\Support\Str::slug($product->category->name, '-')}}">
+                        <div class="single-product-item">
+                            <div class="product-image">
+                                <a href="{{route('product',$product->id)}}"><img
+                                        src="{{$product->avatar?$product->avatarUrl:asset('assets/img/products/product-img-1.jpg')}}"
+                                        alt=""></a>
+                            </div>
+                            <h3>{{$product->name}}</h3>
+                            <p class="product-price">{{$product->vndPrice}} VND</p>
+                            <form id="add-{{$product->id}}" action="{{route('addCart')}}" method="post">
+                                <input hidden name="productId" value="{{$product->id}}">
+                                @csrf
+                                <a onclick="document.getElementById('add-{{$product->id}}').submit();" class="cart-btn"><i
+                                        class="fas fa-shopping-cart"></i> Add to
+                                    Cart</a>
+                            </form>
                         </div>
-                        <h3>Strawberry</h3>
-                        <p class="product-price"><span>Per Kg</span> 85$ </p>
-                        <a href="{{route('cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 text-center berry">
-                    <div class="single-product-item">
-                        <div class="product-image">
-                            <a href="{{route('product',1)}}"><img src="assets/img/products/product-img-2.jpg" alt=""></a>
-                        </div>
-                        <h3>Berry</h3>
-                        <p class="product-price"><span>Per Kg</span> 70$ </p>
-                        <a href="{{route('cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 text-center lemon">
-                    <div class="single-product-item">
-                        <div class="product-image">
-                            <a href="{{route('product',1)}}"><img src="assets/img/products/product-img-3.jpg" alt=""></a>
-                        </div>
-                        <h3>Lemon</h3>
-                        <p class="product-price"><span>Per Kg</span> 35$ </p>
-                        <a href="{{route('cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 text-center avocado">
-                    <div class="single-product-item">
-                        <div class="product-image">
-                            <a href="{{route('product',1)}}"><img src="assets/img/products/product-img-4.jpg" alt=""></a>
-                        </div>
-                        <h3>Avocado</h3>
-                        <p class="product-price"><span>Per Kg</span> 50$ </p>
-                        <a href="{{route('cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 text-center">
-                    <div class="single-product-item">
-                        <div class="product-image">
-                            <a href="{{route('product',1)}}"><img src="assets/img/products/product-img-5.jpg" alt=""></a>
-                        </div>
-                        <h3>Green Apple</h3>
-                        <p class="product-price"><span>Per Kg</span> 45$ </p>
-                        <a href="{{route('cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 text-center strawberry">
-                    <div class="single-product-item">
-                        <div class="product-image">
-                            <a href="{{route('product',1)}}"><img src="assets/img/products/product-img-6.jpg" alt=""></a>
-                        </div>
-                        <h3>Strawberry</h3>
-                        <p class="product-price"><span>Per Kg</span> 80$ </p>
-                        <a href="{{route('cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="pagination-wrap">
-                        <ul>
-                            <li><a href="#">Prev</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a class="active" href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">Next</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            {{$products->onEachSide(5)->links('layouts/_pagination')}}
+
         </div>
     </div>
     <!-- end products -->
