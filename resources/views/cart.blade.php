@@ -27,15 +27,23 @@
                             </thead>
                             <tbody>
                             @foreach($cart as $item)
-                                <tr class="table-body-row">
-                                    <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
+                                <tr class="table-body-row cart">
+                                    <td class="product-remove">
+                                        <a class="delete-cart-item" data-route="{{route('deleteCardItem')}}"
+                                           data-id="{{$item[0]->id}}">
+                                            <i class="far fa-window-close"></i>
+                                        </a>
+                                    </td>
                                     <td class="product-image"><img
                                             src="{{$item[0]->avatar?$item[0]->avatarUrl:asset('assets/img/products/product-img-1.jpg')}}"
                                             alt="">
                                     </td>
                                     <td class="product-name">{{$item[0]->name}}</td>
                                     <td class="product-price">{{$item[0]->vndPrice}} VND</td>
-                                    <td class="product-quantity"><input type="number" placeholder="{{$item[1]}}"></td>
+                                    <td class="product-quantity">
+                                        <input name="quantity" min="0" step="1" type="number" value="{{$item[1]}}">
+                                        <input name="id" hidden value="{{$item[0]->id}}">
+                                    </td>
                                     <td class="product-total">{{$item[2]}}</td>
                                 </tr>
                             @endforeach
@@ -69,7 +77,7 @@
                             </tbody>
                         </table>
                         <div class="cart-buttons">
-                            <a href="{{route('cart')}}" class="boxed-btn">Update Cart</a>
+                            <a id="updateCart" data-route="{{route('updateCart')}}" class="boxed-btn">Update Cart</a>
                             <a href="{{route('checkout')}}" class="boxed-btn black">Check Out</a>
                         </div>
                     </div>

@@ -22,3 +22,5 @@
 <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
 <!-- responsive -->
 <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
+<!-- csrf -->
+<meta name="csrf-token" content="{{ csrf_token() }}">

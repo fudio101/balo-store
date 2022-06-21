@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddCartRequest;
-use App\Models\Category;
+use App\Http\Requests\UpdateCartRequest;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -11,8 +11,9 @@ use App\Service\CartService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -92,8 +93,28 @@ class ProductController extends Controller
     final public function addCart(AddCartRequest $request): RedirectResponse
     {
         $this->cartService->addCart($request->input('productId'),
-            $request->input('quantity') ? $request->input('quantity') : 1);
+            $request->input('quantity') ?: 1);
         return redirect()->back();
+    }
+
+    /**
+     * @param  UpdateCartRequest  $request
+     * @return JsonResponse
+     */
+    final public function updateCart(UpdateCartRequest $request): JsonResponse
+    {
+        $this->cartService->updateCard($request->input());
+        return response()->json(['result' => true]);
+    }
+
+    /**
+     * @param  Request  $request
+     * @return JsonResponse
+     */
+    final public function deleteCardItem(Request $request): JsonResponse
+    {
+        $this->cartService->deleteCardItem($request->input('id'));
+        return response()->json(['result' => true]);
     }
 
     /**
@@ -114,7 +135,7 @@ class ProductController extends Controller
             'title' => 'Cart',
             'secondTitle' => 'Best of your mind',
             'cart' => $cartItems,
-            'total' => $temp,
+            'total' => $total,
         ]);
     }
 

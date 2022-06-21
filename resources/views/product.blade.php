@@ -28,7 +28,7 @@
                             perferendis eos eum modi! Tempora, earum.</p>
                         <div class="single-product-form">
                             <form id="add-{{$product->id}}" action="{{route('addCart')}}" method="post">
-                                <input type="number" name="quantity" placeholder="1">
+                                <input type="number" name="quantity" min="1" step="1" value="1">
                                 <input hidden name="productId" value="{{$product->id}}">
                                 @csrf
                             </form>

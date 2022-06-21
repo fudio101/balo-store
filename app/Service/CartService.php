@@ -41,6 +41,7 @@ class CartService
             if (((int) $item[0]) === $id) {
                 $item[1] += $quantity;
                 $cart[$key] = $item;
+//                dd($cart[$key]);
                 session()->put('cart', $cart);
                 return true;
             }
@@ -84,5 +85,42 @@ class CartService
             $counter += (int) $item[1];
         }
         return $counter;
+    }
+
+    /**
+     * @param  array  $cardItems
+     * @return bool
+     */
+    public function updateCard(array $cardItems): bool
+    {
+        $cart = [];
+        foreach ($cardItems as $item) {
+            if (((int) $item[1]) !== 0) {
+                $cart[] = $item;
+            }
+        }
+        session()->put('cart', $cart);
+        return true;
+    }
+
+    /**
+     * @param  int  $id
+     * @return bool
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function deleteCardItem(int $id): bool
+    {
+        \session()->regenerate();
+        $cart = $this->getCart();
+
+        foreach ($cart as $index => $item) {
+            if (((int) $item[0]) === $id) {
+                unset($cart[$index]);
+                \session()->put('cart', $cart);
+                return true;
+            }
+        }
+        return false;
     }
 }
