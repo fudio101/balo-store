@@ -3,6 +3,7 @@
 namespace App\Service;
 
 
+use App\Models\Discount;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use Psr\Container\ContainerExceptionInterface;
@@ -91,7 +92,7 @@ class CartService
      * @param  array  $cardItems
      * @return bool
      */
-    public function updateCard(array $cardItems): bool
+    final public function updateCard(array $cardItems): bool
     {
         $cart = [];
         foreach ($cardItems as $item) {
@@ -109,7 +110,7 @@ class CartService
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function deleteCardItem(int $id): bool
+    final public function deleteCardItem(int $id): bool
     {
         \session()->regenerate();
         $cart = $this->getCart();
@@ -122,5 +123,25 @@ class CartService
             }
         }
         return false;
+    }
+
+    /**
+     * @param  Discount  $discount
+     * @return bool
+     */
+    final public function applyCoupon(Discount $discount): bool
+    {
+        \session()->put('coupon', [$discount->code, $discount->discount]);
+        return true;
+    }
+
+    /**
+     * @return mixed
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    final public function getCoupon(): mixed
+    {
+        return \session()->get('coupon');
     }
 }

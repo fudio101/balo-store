@@ -30,6 +30,7 @@ Route::get('/product/{product}',[\App\Http\Controllers\ProductController::class,
 Route::post('/add-cart',[\App\Http\Controllers\ProductController::class,'addCart'])->name('addCart');
 Route::post('/update-cart',[\App\Http\Controllers\ProductController::class,'updateCart'])->name('updateCart');
 Route::post('/delete-cart-item',[\App\Http\Controllers\ProductController::class,'deleteCardItem'])->name('deleteCardItem');
+Route::post('/apply-coupon',[\App\Http\Controllers\ProductController::class,'applyCoupon'])->name('applyCoupon');
 //Admin login
 Route::get('/admin/login', [AdminController::class, 'loginIndex'])->name('login');
 Route::post('/admin/login', [AdminController::class, 'login']);

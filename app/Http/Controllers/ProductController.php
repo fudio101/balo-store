@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use App\Models\Category;
+use App\Models\Discount;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -33,9 +35,11 @@ class ProductController extends Controller
      */
     final public function index(): View|Factory|Application
     {
+        $categories = Category::all();
         return \view('shop', [
             'title' => 'Shop',
             'secondTitle' => 'Everything you need',
+            'categories' => $categories,
         ]);
     }
 
@@ -110,6 +114,8 @@ class ProductController extends Controller
     /**
      * @param  Request  $request
      * @return JsonResponse
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     final public function deleteCardItem(Request $request): JsonResponse
     {
@@ -118,7 +124,21 @@ class ProductController extends Controller
     }
 
     /**
+     * @param  Request  $request
+     * @return RedirectResponse
+     */
+    final public function applyCoupon(Request $request): RedirectResponse
+    {
+        $request->validate(['couponCode' => 'required|string|exists:discounts,code']);
+        $discount = Discount::query()->where('code', '=', $request->input('couponCode'))->first();
+        $this->cartService->applyCoupon($discount);
+        return redirect()->back();
+    }
+
+    /**
      * @return Factory|View|Application
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     final public function cart(): Factory|View|Application
     {
@@ -131,11 +151,13 @@ class ProductController extends Controller
             $cartItems[] = [$product, $item[1], number_format($temp, 0, '', ',').' VND'];
             $total += $temp;
         }
+        $coupon = $this->cartService->getCoupon();
         return \view('cart', [
             'title' => 'Cart',
             'secondTitle' => 'Best of your mind',
             'cart' => $cartItems,
             'total' => $total,
+            'discount' => $coupon ? $coupon[1] : 0,
         ]);
     }
 
