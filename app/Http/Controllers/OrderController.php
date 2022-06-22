@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PayRequest;
+use App\Mail\Bill;
 use App\Models\Discount;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
@@ -12,6 +13,7 @@ use App\Models\Product;
 use App\Service\CartService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -109,7 +111,10 @@ class OrderController extends Controller
 
         $this->cartService->destroy();
 
-        session()->flash('alert-success','Pay successfully');
+        session()->flash('alert-success', 'Pay successfully');
+
+        Mail::to($email)->send(new Bill());
+
         return Redirect::route('homepage');
     }
 

@@ -26,7 +26,7 @@ class PayRequest extends FormRequest
         return [
             'name' => 'required|string',
             'phone' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'address' => 'required',
             'district' => 'required',
         ];
