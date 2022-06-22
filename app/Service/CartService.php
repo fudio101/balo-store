@@ -53,11 +53,11 @@ class CartService
     }
 
     /**
-     * @return mixed
+     * @return int
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    final public function getTotal(): mixed
+    final public function getTotal(): int
     {
         $cart = $this->getCart();
         if (!$cart) {
@@ -65,7 +65,7 @@ class CartService
         }
         $total = 0;
         foreach ($cart as $item) {
-            $total += Product::query()->find($item[0])->get('price');
+            $total += Product::query()->find($item[0])->first()->price;
         }
         return $total;
     }
@@ -128,10 +128,16 @@ class CartService
     /**
      * @param  Discount  $discount
      * @return bool
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     final public function applyCoupon(Discount $discount): bool
     {
-        \session()->put('coupon', [$discount->code, $discount->discount]);
+        if ($this->getTotal() < $discount->payment_limit) {
+            return false;
+        }
+        \session()->flash('coupon', [$discount->code, $discount->discount]);
+
         return true;
     }
 
@@ -142,6 +148,25 @@ class CartService
      */
     final public function getCoupon(): mixed
     {
+        \session()->keep('coupon');
         return \session()->get('coupon');
+    }
+
+    /**
+     * @return mixed
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    final public function getCoupon1(): mixed
+    {
+        return \session()->get('coupon');
+    }
+
+    /**
+     * @return void
+     */
+    final public function destroy(): void
+    {
+        \session()->forget('cart');
     }
 }

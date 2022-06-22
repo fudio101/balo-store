@@ -19,7 +19,7 @@
 
     <!-- favicon -->
     {{--    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">--}}
-    <link rel="shortcut icon" type="image/png" href="{{asset('assets/img/favicon.png')}}">
+    <link rel="shortcut icon" type="image/png" href="{{asset('assets/img/logo.svg')}}">
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -48,9 +48,11 @@
                 <span class="close-btn"><i class="fas fa-window-close"></i></span>
                 <div class="search-bar">
                     <div class="search-bar-tablecell">
-                        <h3>Search For:</h3>
-                        <input type="text" placeholder="Keywords">
-                        <button type="submit">Search <i class="fas fa-search"></i></button>
+                        <form method="get" action="{{route('search')}}">
+                            <label for="keywords">Search For:</label>
+                            <input type="text" id="keywords" name="keywords" placeholder="Keywords">
+                            <button type="submit">Search <i class="fas fa-search"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -58,6 +60,26 @@
     </div>
 </div>
 <!-- end search area -->
+<!-- errors show -->
+@if($errors->any())
+    {!! implode('', $errors->all('
+    <script>
+        toastr.info(":message")
+    </script>
+    ')) !!}
+@endif
+@foreach (['error', 'warning', 'success', 'info'] as $msg)
+    @if(Session::has('alert-' . $msg))
+        {{--        {!! implode('', $errors->all('--}}
+        {{--        <script>--}}
+        {{--            toastr.info(":message")--}}
+        {{--        </script>--}}
+        {{--        ')) !!}--}}
+        <script>
+            toastr["{{$msg}}"]("{{Session::get('alert-' . $msg) }}")
+        </script>
+    @endif
+@endforeach
 
 @yield('top-custom')
 
@@ -77,8 +99,6 @@
 @include('layouts._copyright')
 <!-- end copyright -->
 
-<!-- jquery -->
-<script src="{{asset('assets/js/jquery-1.11.3.min.js')}}"></script>
 <!-- bootstrap -->
 <script src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- count down -->
@@ -96,6 +116,7 @@
 <!-- sticker js -->
 <script src="{{asset('assets/js/sticker.js')}}"></script>
 <!-- main js -->
+@yield('js')
 <script src="{{asset('assets/js/main.js')}}"></script>
 
 </body>

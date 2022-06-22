@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
             $table->string('code')->comment('Mã giảm giá');
-            $table->string('discount')->comment('Giá giảm');
+            $table->integer('discount')->comment('Giá giảm');
             $table->integer('limit_number')->comment('Giới hạn lượt mua');
             $table->integer('number_used')->default(0)->comment('Số lượt đã dùng');
             $table->integer('payment_limit')->comment('Giá trị đơn hàng tối thiểu');

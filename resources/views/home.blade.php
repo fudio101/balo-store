@@ -218,7 +218,7 @@
                 <div class="col-lg-6 col-md-12">
                     <div class="abt-text">
                         <p class="top-sub">Since Year 1999</p>
-                        <h2>We are <span class="orange-text">Fruitkha</span></h2>
+                        <h2>We are <span class="orange-text">One</span></h2>
                         <p>Etiam vulputate ut augue vel sodales. In sollicitudin neque et massa porttitor vestibulum ac
                             vel nisi. Vestibulum placerat eget dolor sit amet posuere. In ut dolor aliquet, aliquet
                             sapien sed, interdum velit. Nam eu molestie lorem.</p>
@@ -263,7 +263,7 @@
                             <div class="latest-news-bg news-bg-1"></div>
                         </a>
                         <div class="news-text-box">
-                            <h3><a href="#">You will vainly look for fruit on it in autumn.</a></h3>
+                            <h3><a href="#">Lorem</a></h3>
                             <p class="blog-meta">
                                 <span class="author"><i class="fas fa-user"></i> Admin</span>
                                 <span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
@@ -281,7 +281,7 @@
                             <div class="latest-news-bg news-bg-2"></div>
                         </a>
                         <div class="news-text-box">
-                            <h3><a href="#">A man's worth has its season, like tomato.</a></h3>
+                            <h3><a href="#">Lorem</a></h3>
                             <p class="blog-meta">
                                 <span class="author"><i class="fas fa-user"></i> Admin</span>
                                 <span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
@@ -299,7 +299,7 @@
                             <div class="latest-news-bg news-bg-3"></div>
                         </a>
                         <div class="news-text-box">
-                            <h3><a href="#">Good thoughts bear good fresh juicy fruit.</a></h3>
+                            <h3><a href="#">Lorem</a></h3>
                             <p class="blog-meta">
                                 <span class="author"><i class="fas fa-user"></i> Admin</span>
                                 <span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>

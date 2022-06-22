@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Province;
 use App\Service\CartService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -66,12 +67,34 @@ class HomeController extends Controller
 
     /**
      * @return Factory|View|Application
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     final public function checkout(): Factory|View|Application
     {
+        $cart = $this->cartService->getCart();
+        $cartItems = [];
+        $total = 0;
+        foreach ($cart as $item) {
+            $product = Product::query()->find($item[0]);
+            $temp = $product->price * $item[1];
+            $cartItems[] = [$product, number_format($temp, 0, '', ',').' VND'];
+            $total += $temp;
+        }
+        $coupon = $this->cartService->getCoupon();
+        $provinces = Province::all();
         return \view('checkout', [
             'title' => 'Checkout',
             'secondTitle' => 'One more step',
+            'cart' => $cartItems,
+            'total' => $total,
+            'discount' => $coupon ? $coupon[1] : 0,
+            'provinces' => $provinces,
         ]);
+    }
+
+    final public function bill()
+    {
+        return \view('bill');
     }
 }

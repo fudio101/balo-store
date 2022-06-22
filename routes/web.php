@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,12 +26,16 @@ Route::get('/about',[HomeController::class,'about'])->name('about');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/cart',[\App\Http\Controllers\ProductController::class,'cart'])->name('cart');
 Route::get('/checkout',[HomeController::class,'checkout'])->name('checkout');
+Route::post('/pay',[\App\Http\Controllers\OrderController::class,'pay'])->name('pay');
+Route::post('/get-district',[DistrictController::class,'getDistrict'])->name('getDistrict');
 Route::get('/shop',[\App\Http\Controllers\ProductController::class,'index'])->name('shop');
+Route::get('/search',[\App\Http\Controllers\ProductController::class,'search'])->name('search');
 Route::get('/product/{product}',[\App\Http\Controllers\ProductController::class,'show'])->name('product');
 Route::post('/add-cart',[\App\Http\Controllers\ProductController::class,'addCart'])->name('addCart');
 Route::post('/update-cart',[\App\Http\Controllers\ProductController::class,'updateCart'])->name('updateCart');
 Route::post('/delete-cart-item',[\App\Http\Controllers\ProductController::class,'deleteCardItem'])->name('deleteCardItem');
 Route::post('/apply-coupon',[\App\Http\Controllers\ProductController::class,'applyCoupon'])->name('applyCoupon');
+Route::get('/bill',[HomeController::class,'bill'])->name('bill');
 //Admin login
 Route::get('/admin/login', [AdminController::class, 'loginIndex'])->name('login');
 Route::post('/admin/login', [AdminController::class, 'login']);
@@ -64,17 +69,11 @@ Route::middleware('auth')->group(function () {
             Route::post('/import/{product}', [ProductController::class, 'import'])->name('productImport');
         });
 
-        #Product
+        #Order
         Route::prefix('orders')->group(function () {
             Route::get('/', [OrderController::class, 'index'])->name('orderIndex');
             Route::get('/show/{order}', [OrderController::class, 'show'])->name('orderShow');
             Route::post('/update-status', [OrderController::class, 'updateStatus'])->name('orderUpdateStatus');
-//            Route::get('/create', [ProductController::class, 'create'])->name('productCreate');
-//            Route::post('/store', [ProductController::class, 'store'])->name('productStore');
-//            Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('productEdit');
-//            Route::post('/update/{product}', [ProductController::class, 'update'])->name('productUpdate');
-//            Route::delete('/{product}', [ProductController::class, 'destroy'])->name('productDestroy');
-//            Route::post('/import/{product}', [ProductController::class, 'import'])->name('productImport');
         });
 
         #Discount

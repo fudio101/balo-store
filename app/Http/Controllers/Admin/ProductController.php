@@ -27,7 +27,9 @@ class ProductController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        $data = Product::query()->select('*')->where('products.status', '=', 1)->get();
+        $data = Product::query()
+            ->where('status', '=', 1)
+            ->paginate(20);
         return view('admin.product.index', [
             'title' => 'Product Management',
             'data' => $data,

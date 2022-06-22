@@ -21,61 +21,31 @@
                                         <button class="btn btn-link" type="button" data-toggle="collapse"
                                                 data-target="#collapseOne" aria-expanded="true"
                                                 aria-controls="collapseOne">
-                                            Billing Address
+                                            Billing Detail
                                         </button>
                                     </h5>
                                 </div>
-
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                      data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="billing-address-form">
-                                            <form action="{{route('homepage')}}">
-                                                <p><input type="text" placeholder="Name"></p>
-                                                <p><input type="email" placeholder="Email"></p>
-                                                <p><input type="text" placeholder="Address"></p>
-                                                <p><input type="tel" placeholder="Phone"></p>
-                                                <p><textarea name="bill" id="bill" cols="30" rows="10"
-                                                             placeholder="Say Something"></textarea></p>
+                                            <form id="pay-form" method="post" action="{{route('pay')}}">
+                                                @csrf
+                                                <p><input type="text" name="name" placeholder="Name"></p>
+                                                <p><input type="email" name="email" placeholder="Email"></p>
+                                                <p><input type="tel" name="phone" placeholder="Phone"></p>
+                                                <p><select id="province">
+                                                        <option value="0">Province</option>
+                                                        @foreach($provinces as $province)
+                                                            <option
+                                                                value="{{$province->id}}">{{$province->name}}</option>
+                                                        @endforeach
+                                                    </select></p>
+                                                <p><select id="district" name="district">
+                                                        <option value="">District</option>
+                                                    </select></p>
+                                                <p><input type="text" name="address" placeholder="Address"></p>
                                             </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card single-accordion">
-                                <div class="card-header" id="headingTwo">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                                data-target="#collapseTwo" aria-expanded="false"
-                                                aria-controls="collapseTwo">
-                                            Shipping Address
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                     data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="shipping-address-form">
-                                            <p>Your shipping address form is here.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card single-accordion">
-                                <div class="card-header" id="headingThree">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                                data-target="#collapseThree" aria-expanded="false"
-                                                aria-controls="collapseThree">
-                                            Card Details
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                     data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="card-details">
-                                            <p>Your card details goes here.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -90,48 +60,50 @@
                         <table class="order-details">
                             <thead>
                             <tr>
-                                <th>Your order Details</th>
-                                <th>Price</th>
+                                <th>Product</th>
+                                <th>Total</th>
                             </tr>
                             </thead>
                             <tbody class="order-details-body">
-                            <tr>
-                                <td>Product</td>
-                                <td>Total</td>
-                            </tr>
-                            <tr>
-                                <td>Strawberry</td>
-                                <td>$85.00</td>
-                            </tr>
-                            <tr>
-                                <td>Berry</td>
-                                <td>$70.00</td>
-                            </tr>
-                            <tr>
-                                <td>Lemon</td>
-                                <td>$35.00</td>
-                            </tr>
+                            @foreach($cart as $item)
+                                <tr>
+                                    <td>{{$item[0]->name}}</td>
+                                    <td class="text-right">{{$item[1]}}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                             <tbody class="checkout-details">
                             <tr>
                                 <td>Subtotal</td>
-                                <td>$190</td>
+                                <td class="text-right">{{number_format($total, 0, '', ',').' VND'}}</td>
                             </tr>
                             <tr>
                                 <td>Shipping</td>
-                                <td>$50</td>
+                                <td class="text-right">{{number_format(25000, 0, '', ',').' VND'}}</td>
                             </tr>
+                            @if($discount>0)
+                                <tr>
+                                    <td>Coupon</td>
+                                    <td class="text-right">{{number_format($discount, 0, '', ',').' VND'}}</td>
+                                </tr>
+                            @endif
                             <tr>
                                 <td>Total</td>
-                                <td>$240</td>
+                                <td class="text-right">{{number_format($total + 25000 - $discount, 0, '', ',').' VND'}}</td>
                             </tr>
                             </tbody>
                         </table>
-                        <a href="#" class="boxed-btn">Place Order</a>
+                        <a onclick="$('#pay-form').submit();" class="boxed-btn">Place Order</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- end check out section -->
+@endsection
+
+@section('js')
+    <script type="text/javascript">
+        let getDistrictUrl = "{{ route('getDistrict') }}";
+    </script>
 @endsection

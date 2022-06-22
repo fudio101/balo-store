@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
         } else {
             DB::unprepared(file_get_contents('database/migrations/dvhcvn.sql'));
         }
-        Category::factory(7)->create();
-        Product::factory(20)->create();
+        Category::factory(3)->create();
+        Product::factory(100)->create();
         Discount::factory(20)->create();
         Order::factory(25)->create();
         OrderDetail::factory(150)->create();

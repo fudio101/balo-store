@@ -14,7 +14,7 @@
                     <!-- logo -->
                     <div class="site-logo">
                         <a href="{{route('homepage')}}">
-                            <img src="{{asset('assets/img/logo.png')}}" alt="">
+                            <img id="logo" src="{{asset('assets/img/logo.svg')}}" alt="">
                         </a>
                     </div>
                     <!-- logo -->

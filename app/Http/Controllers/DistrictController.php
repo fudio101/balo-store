@@ -5,9 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\District;
 use App\Http\Requests\StoreDistrictRequest;
 use App\Http\Requests\UpdateDistrictRequest;
+use App\Models\Province;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class DistrictController extends Controller
 {
+    /**
+     * @param  Request  $request
+     * @return JsonResponse
+     */
+    final public function getDistrict(Request $request): JsonResponse
+    {
+        $districts = [];
+        foreach (Province::query()->find($request->input('provinceId'))->districts as $district) {
+            $districts[] = [$district->id, $district->name];
+        }
+        return response()->json($districts);
+    }
+
     /**
      * Display a listing of the resource.
      *

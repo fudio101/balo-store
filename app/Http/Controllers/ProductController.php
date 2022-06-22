@@ -50,6 +50,31 @@ class ProductController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @param  Request  $request
+     * @return Application|Factory|View
+     */
+    final public function search(Request $request): View|Factory|Application
+    {
+        $keywords = $request->input('keywords');
+        $products = Product::query()
+            ->where('status', '=', 1)
+            ->whereRaw('quantity - quantity_sold > 0')
+            ->where('name', 'LIKE', "%{$keywords}%")
+            ->orWhere('detail', 'LIKE', "%{$keywords}%")
+            ->orderBy('quantity_sold', 'desc')
+            ->paginate(15);
+        $categories = Category::all();
+        return \view('shop', [
+            'title' => 'Shop',
+            'secondTitle' => 'Everything you need',
+            'categories' => $categories,
+            'products' => $products,
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -126,6 +151,7 @@ class ProductController extends Controller
     final public function deleteCardItem(Request $request): JsonResponse
     {
         $this->cartService->deleteCardItem($request->input('id'));
+        session()->flash('alert-success', 'Delete item successfully');
         return response()->json(['result' => true]);
     }
 
@@ -137,7 +163,11 @@ class ProductController extends Controller
     {
         $request->validate(['couponCode' => 'required|string|exists:discounts,code']);
         $discount = Discount::query()->where('code', '=', $request->input('couponCode'))->first();
-        $this->cartService->applyCoupon($discount);
+        $result = $this->cartService->applyCoupon($discount);
+        if ($result) {
+            session()->flash('alert-success', 'Add coupon successfully');
+        }
+//        session()->flash('alert-error', 'Invalid coupon code');
         return redirect()->back();
     }
 

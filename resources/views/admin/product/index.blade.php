@@ -9,6 +9,8 @@
                 <button class="btn btn-success">Add Product</button>
             </a>
 
+            {{$data->links('vendor/pagination/bootstrap-5')}}
+
             <table class="table table-striped table-hover" style="margin-top: 20px;">
                 <thead>
                 <tr>
@@ -62,9 +64,11 @@
                         </td>
                     </tr>
                 @endforeach
-
                 </tbody>
             </table>
+
+            {{$data->links('vendor/pagination/bootstrap-4')}}
+
         </div>
     </div>
 @endsection

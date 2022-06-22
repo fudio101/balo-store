@@ -210,7 +210,35 @@
                         location.reload();
                 },
             });
+        })
 
+        $("#province").on("change", function () {
+            var provinceId = $(this).val();
+
+            if (provinceId !== '0') {
+                $.ajax({
+                    type: "POST",
+                    url: getDistrictUrl,
+                    data: {'provinceId': provinceId},
+                    success: (data) => {
+                        var html = "";
+                        $.each(data, (key, value) => {
+                            html += `<option value="${value[0]}">${value[1]}</option>`
+                        });
+                        $("#district").html(html);
+                    },
+                });
+            } else {
+                $("#district").html(`<option value="0">Province</option>`);
+            }
+        })
+
+        $("#pay-form").on('submit', () => {
+            var district = $("#district").val()
+            if (district !== '0' && district)
+                $(this).submit();
+            else
+                return false;
         })
 
     });
@@ -218,6 +246,12 @@
 
     jQuery(window).on("load", function () {
         jQuery(".loader").fadeOut(1000);
+        setTimeout(() => {
+            console.log(1)
+            $(".product-lists").isotope({
+                filter: '*',
+            });
+        }, 150)
     });
 
 

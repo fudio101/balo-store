@@ -73,7 +73,6 @@
                     'order_status_id': status
                 },
                 success: function (data) {
-                    confirm(data['message'])
                     location.reload()
                 }
             });

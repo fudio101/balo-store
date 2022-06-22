@@ -18,8 +18,8 @@
                     <div class="col-md-12 col-lg-7 offset-lg-1 offset-xl-0">
                         <div class="hero-text">
                             <div class="hero-text-tablecell">
-                                <p class="subtitle">Fresh & Organic</p>
-                                <h1>Delicious Seasonal Fruits</h1>
+                                <p class="subtitle">Life and smile</p>
+                                <h1>Everything on there</h1>
                                 <div class="hero-btns">
                                     <a href="{{route('shop')}}" class="boxed-btn">Fruit Collection</a>
                                     <a href="{{route('contact')}}" class="bordered-btn">Contact Us</a>
@@ -37,8 +37,8 @@
                     <div class="col-lg-10 offset-lg-1 text-center">
                         <div class="hero-text">
                             <div class="hero-text-tablecell">
-                                <p class="subtitle">Fresh Everyday</p>
-                                <h1>100% Organic Collection</h1>
+                                <p class="subtitle">Choose one</p>
+                                <h1>Quality is the one</h1>
                                 <div class="hero-btns">
                                     <a href="{{route('shop')}}" class="boxed-btn">Visit Shop</a>
                                     <a href="{{route('contact')}}" class="bordered-btn">Contact Us</a>
