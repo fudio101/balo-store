@@ -5,6 +5,7 @@ namespace App\Service;
 
 use App\Models\Discount;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -133,12 +134,32 @@ class CartService
      */
     final public function applyCoupon(Discount $discount): bool
     {
-        if ($this->getTotal() < $discount->payment_limit) {
-            return false;
-        }
-        \session()->flash('coupon', [$discount->code, $discount->discount]);
+        if ($discount) {
+            $temp = Carbon::createFromFormat('Y-m-d', $discount->expiration_date);
 
-        return true;
+            if ($temp->lt(Carbon::now())) {
+                session()->flash('alert-error', 'Coupon code has expired');
+                return false;
+            }
+
+            if ($this->getTotal() < $discount->payment_limit) {
+                session()->flash('alert-error', 'Total is less than coupon limit');
+                return false;
+            }
+
+            if ($discount->limit_number - $discount->number_used <= 0) {
+                session()->flash('alert-error', 'Coupon have been used up');
+                return false;
+            }
+
+            session()->flash('alert-success', 'Use successful coupon');
+            \session()->flash('coupon', [$discount->code, $discount->discount]);
+            return true;
+
+        }
+
+        session()->flash('alert-error', 'Invalid coupon code');
+        return false;
     }
 
     /**

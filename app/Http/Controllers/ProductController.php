@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Service\CartService;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -70,7 +71,7 @@ class ProductController extends Controller
             'title' => 'Shop',
             'secondTitle' => 'Everything you need',
             'categories' => $categories,
-            'products' => $products,
+            'products' => $products->appends($request->except('page')),
         ]);
     }
 
@@ -163,11 +164,7 @@ class ProductController extends Controller
     {
         $request->validate(['couponCode' => 'required|string|exists:discounts,code']);
         $discount = Discount::query()->where('code', '=', $request->input('couponCode'))->first();
-        $result = $this->cartService->applyCoupon($discount);
-        if ($result) {
-            session()->flash('alert-success', 'Add coupon successfully');
-        }
-//        session()->flash('alert-error', 'Invalid coupon code');
+        $this->cartService->applyCoupon($discount);
         return redirect()->back();
     }
 
