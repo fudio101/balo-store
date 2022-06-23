@@ -7,7 +7,7 @@
 ?>
 
     <!-- fontawesome -->
-<link rel="stylesheet" href="{{asset('assets/css/all.min.css')}}">
+<link rel="stylesheet" href="{{secure_asset('assets/css/all.min.css')}}">
 <!-- bootstrap -->
 <link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}">
 <!-- owl carousel -->
