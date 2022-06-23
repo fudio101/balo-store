@@ -22,7 +22,10 @@ class DiscountController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        $data = Discount::query()->where('status', '=', 1)->get();
+        $data = Discount::query()
+            ->where('status', '=', 1)
+            ->orderBy('expiration_date', 'desc')
+            ->get();
         return view('admin.discount.index', [
             'title' => 'Discount Manager',
             'tag' => 'discount',

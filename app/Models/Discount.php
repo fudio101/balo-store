@@ -46,7 +46,7 @@ class Discount extends Model
     protected function expirationDay(): Attribute
     {
         return Attribute::make(
-            get: static fn($value, $attribute) => now()->diffInDays($attribute['expiration_date']),
+            get: static fn($value, $attribute) => now()->diffInDays($attribute['expiration_date'], false),
         );
     }
 

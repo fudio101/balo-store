@@ -135,9 +135,7 @@ class CartService
     final public function applyCoupon(Discount $discount): bool
     {
         if ($discount) {
-            $temp = Carbon::createFromFormat('Y-m-d', $discount->expiration_date);
-
-            if ($temp->lt(Carbon::now())) {
+            if ($discount->expirationDay <= 0) {
                 session()->flash('alert-error', 'Coupon code has expired');
                 return false;
             }
