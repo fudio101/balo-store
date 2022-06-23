@@ -3,7 +3,7 @@
 <head>
     <title>Đăng Nhập</title>
     <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="{{asset('assets/images/store-solid.svg')}}"/>
+    <link rel="icon" type="image/png" href="{{asset('assets/img/hacker.png')}}"/>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -19,7 +19,7 @@
 </head>
 
 <body
-    style="background-image: url({{asset('assets/images/background-admin1.jpg')}}); background-size: cover; background-repeat: no-repeat;">
+    style="background-image: url({{asset('assets/img/bg-admin.png')}}); background-size: cover; background-repeat: no-repeat;">
 <div class="container">
     <div class="panel panel-primary shadow-lg"
          style="width: 480px; margin: 50px auto 0;background-color: white; padding: 10px; border-radius: 5px; box-shadow: 2px 2px #9ac9f5;">

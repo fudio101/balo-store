@@ -74,10 +74,15 @@ class OrderController extends Controller
         $email = $request->input('email');
         $address = $request->input('address');
 
+        $hash = hash('md5', $name.$phone.$email.$address);
+        do {
+            $orderCode = strtoupper(substr($hash, random_int(0, 23), 9));
+        } while (Order::query()->where('order_code', '=', $orderCode)->count() > 0);
+
         $order = new Order();
 
         $order->fill([
-            'order_code' => strtoupper(substr(hash('md5', $name.$phone.$email.$address), random_int(0, 23), 9)),
+            'order_code' => $orderCode,
             'name' => $name,
             'phone' => $phone,
             'email' => $email,
@@ -93,7 +98,7 @@ class OrderController extends Controller
 
         if ($saveResult) {
             if ($discount) {
-                $discount->number_used += 1;
+                ++$discount->number_used;
                 $result = $discount->save();
                 if (!$result) {
                     return Redirect::back()->withErrors('Save discount error');
