@@ -97,7 +97,7 @@ class CartService
     {
         $cart = [];
         foreach ($cardItems as $item) {
-            if (((int) $item[1]) !== 0) {
+            if (((int) $item[1]) > 0) {
                 $cart[] = $item;
             }
         }
