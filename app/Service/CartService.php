@@ -146,7 +146,7 @@ class CartService
             }
 
             if ($discount->limit_number - $discount->number_used <= 0) {
-                session()->flash('alert-error', 'Coupon have been used up');
+                session()->flash('alert-error', 'Mã giảm giá đã hết lần sử dụng');
                 return false;
             }
 

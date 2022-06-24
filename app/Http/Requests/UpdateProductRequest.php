@@ -30,7 +30,7 @@ class UpdateProductRequest extends FormRequest
             'images.*' => 'image',
             'detail' => 'nullable|string',
             'producer_id' => 'required|integer',
-            'price' => 'required|integer'
+            'price' => 'required|integer|min:0'
         ];
     }
 }
