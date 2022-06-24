@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             DB::unprepared(file_get_contents('database/migrations/mysql_data.sql'));
         } else {
             DB::unprepared(file_get_contents('database/migrations/dvhcvn.sql'));
-            DB::unprepared(file_get_contents('database/migrations/mysql_data.sql'));
+            DB::unprepared(file_get_contents('database/migrations/data.sql'));
         }
 //        Category::factory(3)->create();
 //        Product::factory(100)->create();
