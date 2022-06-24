@@ -22,13 +22,15 @@ class DatabaseSeeder extends Seeder
     {
         if (env('APP_URL') === 'http://localhost') {
             DB::unprepared(file_get_contents('database/migrations/dvhc_mysql.sql'));
+            DB::unprepared(file_get_contents('database/migrations/mysql_data.sql'));
         } else {
             DB::unprepared(file_get_contents('database/migrations/dvhcvn.sql'));
+            DB::unprepared(file_get_contents('database/migrations/mysql_data.sql'));
         }
-        Category::factory(3)->create();
-        Product::factory(100)->create();
-        Discount::factory(20)->create();
-        Order::factory(25)->create();
-        OrderDetail::factory(150)->create();
+//        Category::factory(3)->create();
+//        Product::factory(100)->create();
+//        Discount::factory(20)->create();
+//        Order::factory(25)->create();
+//        OrderDetail::factory(150)->create();
     }
 }

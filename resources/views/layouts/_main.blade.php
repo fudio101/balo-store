@@ -19,7 +19,8 @@
 
     <!-- favicon -->
     {{--    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">--}}
-    <link rel="shortcut icon" type="image/png" href="{{secure_asset('assets/img/logo.svg')}}">
+    <link rel="shortcut icon" type="image/png"
+          href="{{env('APP_URL')!=='http://localhost'?secure_asset('assets/img/logo.svg'):asset('assets/img/logo.svg')}}">
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -99,25 +100,47 @@
 @include('layouts._copyright')
 <!-- end copyright -->
 
-<!-- bootstrap -->
-<script src="{{secure_asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
-<!-- count down -->
-<script src="{{secure_asset('assets/js/jquery.countdown.js')}}"></script>
-<!-- isotope -->
-<script src="{{secure_asset('assets/js/jquery.isotope-3.0.6.min.js')}}"></script>
-<!-- waypoints -->
-<script src="{{secure_asset('assets/js/waypoints.js')}}"></script>
-<!-- owl carousel -->
-<script src="{{secure_asset('assets/js/owl.carousel.min.js')}}"></script>
-<!-- magnific popup -->
-<script src="{{secure_asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
-<!-- mean menu -->
-<script src="{{secure_asset('assets/js/jquery.meanmenu.min.js')}}"></script>
-<!-- sticker js -->
-<script src="{{secure_asset('assets/js/sticker.js')}}"></script>
-<!-- main js -->
-@yield('js')
-<script src="{{secure_asset('assets/js/main.js')}}"></script>
+@if(env('APP_URL')!=='http://localhost')
+    <!-- bootstrap -->
+    <script src="{{secure_asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!-- count down -->
+    <script src="{{secure_asset('assets/js/jquery.countdown.js')}}"></script>
+    <!-- isotope -->
+    <script src="{{secure_asset('assets/js/jquery.isotope-3.0.6.min.js')}}"></script>
+    <!-- waypoints -->
+    <script src="{{secure_asset('assets/js/waypoints.js')}}"></script>
+    <!-- owl carousel -->
+    <script src="{{secure_asset('assets/js/owl.carousel.min.js')}}"></script>
+    <!-- magnific popup -->
+    <script src="{{secure_asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+    <!-- mean menu -->
+    <script src="{{secure_asset('assets/js/jquery.meanmenu.min.js')}}"></script>
+    <!-- sticker js -->
+    <script src="{{secure_asset('assets/js/sticker.js')}}"></script>
+    <!-- main js -->
+    @yield('js')
+    <script src="{{secure_asset('assets/js/main.js')}}"></script>
+@else
+    <!-- bootstrap -->
+    <script src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!-- count down -->
+    <script src="{{asset('assets/js/jquery.countdown.js')}}"></script>
+    <!-- isotope -->
+    <script src="{{asset('assets/js/jquery.isotope-3.0.6.min.js')}}"></script>
+    <!-- waypoints -->
+    <script src="{{asset('assets/js/waypoints.js')}}"></script>
+    <!-- owl carousel -->
+    <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
+    <!-- magnific popup -->
+    <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+    <!-- mean menu -->
+    <script src="{{asset('assets/js/jquery.meanmenu.min.js')}}"></script>
+    <!-- sticker js -->
+    <script src="{{asset('assets/js/sticker.js')}}"></script>
+    <!-- main js -->
+    @yield('js')
+    <script src="{{asset('assets/js/main.js')}}"></script>
+@endif
 
 </body>
 </html>
