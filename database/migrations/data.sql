@@ -1,17 +1,17 @@
 --
--- Dumping data for table `categories`
+-- Dumping data for table categories
 --
 
-INSERT INTO `categories`
+INSERT INTO categories
 VALUES (1, 'Percy Herman', NULL, 1, 1, 1, '2022-06-21 22:51:27', '2022-06-21 22:51:27'),
        (2, 'Dejon Prohaska', NULL, 1, 1, 1, '2022-06-21 22:51:27', '2022-06-21 22:51:27'),
        (3, 'Miss Chasity King', NULL, 1, 1, 1, '2022-06-21 22:51:27', '2022-06-21 22:51:27');
 
 --
--- Dumping data for table `products`
+-- Dumping data for table products
 --
 
-INSERT INTO `products`
+INSERT INTO products
 VALUES (1, 1, 'Reuben Nolan', 'photos/products/XHed32IN510ugddKksB3Qt799l4RWpPZQFI0fkq1.jpg', NULL, NULL, 2, 2916, 0,
         785715, 1, 1, 2, '2022-06-21 22:51:27', '2022-06-23 04:58:24'),
        (2, 3, 'Violet Schultz', 'photos/products/qqe3S3TsKohCDgfb0ouMBnws2SU8hvCK7npUaNfL.png', NULL, NULL, 2, 671, 0,
@@ -74,10 +74,10 @@ VALUES (1, 1, 'Reuben Nolan', 'photos/products/XHed32IN510ugddKksB3Qt799l4RWpPZQ
         1649, 0, 4245156, 1, 1, 2, '2022-06-21 22:51:27', '2022-06-23 05:16:55');
 
 --
--- Dumping data for table `discounts`
+-- Dumping data for table discounts
 --
 
-INSERT INTO `discounts`
+INSERT INTO discounts
 VALUES (1, 'QJG2YX3C', 191519, 18, 18, 348342, '2022-05-24 01:03:04',
         'Quibusdam dolor nisi velit quo. Incidunt eius rem temporibus dolorum impedit laboriosam minima qui. Velit dignissimos sed saepe culpa aliquid eos.',
         1, 1, 1, '2022-06-21 22:51:28', '2022-06-21 22:51:28'),
@@ -140,10 +140,10 @@ VALUES (1, 'QJG2YX3C', 191519, 18, 18, 348342, '2022-05-24 01:03:04',
         '2022-06-21 22:51:28');
 
 --
--- Dumping data for table `orders`
+-- Dumping data for table orders
 --
 
-INSERT INTO `orders`
+INSERT INTO orders
 VALUES (1, 'B27048078', 'Wade Littel', '813.387.3217', 'hills.lera@hotmail.com', 0, 0, 0, 259,
         '9925 Daniella Island Suite 786 Lockmanland, UT 71912', 3, 1, 1, '2022-06-21 22:51:28', '2022-06-21 22:52:10'),
        (2, 'V06347149', 'Jennings Bauch', '+1-520-608-3460', 'garland.konopelski@hyatt.com', 0, 0, 0, 876,
@@ -253,10 +253,10 @@ VALUES (1, 'B27048078', 'Wade Littel', '813.387.3217', 'hills.lera@hotmail.com',
         '123 Thạnh Lộc', 1, 1, 2, '2022-06-23 08:06:29', '2022-06-23 08:06:29');
 
 --
--- Dumping data for table `order_details`
+-- Dumping data for table order_details
 --
 
-INSERT INTO `order_details`
+INSERT INTO order_details
 VALUES (5, 15, 26, 4, 753837, '2022-06-21 22:51:28', '2022-06-21 22:51:28'),
        (9, 12, 24, 5, 1577783, '2022-06-21 22:51:28', '2022-06-21 22:51:28'),
        (12, 25, 24, 2, 1577783, '2022-06-21 22:51:28', '2022-06-21 22:51:28'),
