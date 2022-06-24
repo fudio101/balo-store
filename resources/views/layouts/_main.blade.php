@@ -71,11 +71,6 @@
 @endif
 @foreach (['error', 'warning', 'success', 'info'] as $msg)
     @if(Session::has('alert-' . $msg))
-        {{--        {!! implode('', $errors->all('--}}
-        {{--        <script>--}}
-        {{--            toastr.info(":message")--}}
-        {{--        </script>--}}
-        {{--        ')) !!}--}}
         <script>
             toastr["{{$msg}}"]("{{Session::get('alert-' . $msg) }}")
         </script>

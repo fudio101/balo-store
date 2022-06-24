@@ -130,6 +130,7 @@ class ProductController extends Controller
     {
         $this->cartService->addCart($request->input('productId'),
             $request->input('quantity') ?: 1);
+        session()->flash('alert-success','Successfully added products to cart');
         return redirect()->back();
     }
 
