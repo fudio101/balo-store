@@ -1,3 +1,7 @@
+## BaloStore
+Website selling backpacks coded in Laravel
+
+
 ## Requirement
 - Php 8.1.5
 - Composer
